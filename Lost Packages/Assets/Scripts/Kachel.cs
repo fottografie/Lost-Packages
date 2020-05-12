@@ -9,6 +9,7 @@ public class Kachel : MonoBehaviour
     public int index;
     public GameObject[] neighbours = new GameObject[6];
     public GameObject flow;
+    public GameObject[] playerNextField = new GameObject[3];
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,6 @@ public class Kachel : MonoBehaviour
         index = int.Parse(nameO[1]);
         _ = Instantiate(pfeil, transform.position, transform.rotation);
         GetFlow();
-
     }
 
     // Update is called once per frame
@@ -56,48 +56,48 @@ public class Kachel : MonoBehaviour
 
     }
 
-    void GetNeighbours()
+
+
+    public GameObject[] PlayerNextField()
     {
-        int reihe = 6;
+        if (transform.eulerAngles.z == 0)
+        {
+            playerNextField[0] = neighbours[1];
+            playerNextField[1] = neighbours[3];
+            playerNextField[2] = neighbours[5];
+        }
+        else if (transform.eulerAngles.z > 59 && transform.eulerAngles.z < 61)
+        {
+            playerNextField[0] = neighbours[0];
+            playerNextField[1] = neighbours[1];
+            playerNextField[2] = neighbours[3];
+        }
+        else if (transform.eulerAngles.z > 119 && transform.eulerAngles.z < 121)
+        {
+            playerNextField[0] = neighbours[2];
+            playerNextField[1] = neighbours[0];
+            playerNextField[2] = neighbours[1];
+        }
+        else if (transform.eulerAngles.z == 180)
+        {
+            playerNextField[0] = neighbours[4];
+            playerNextField[1] = neighbours[2];
+            playerNextField[2] = neighbours[0];
+        }
+        else if (transform.eulerAngles.z == 240)
+        {
+            playerNextField[0] = neighbours[2];
+            playerNextField[1] = neighbours[4];
+            playerNextField[2] = neighbours[5];
+        }
+        else if (transform.eulerAngles.z == 300)
+        {
+            playerNextField[0] = neighbours[4];
+            playerNextField[1] = neighbours[5];
+            playerNextField[2] = neighbours[3];
+        }
 
-        if (index > 0 && index < 5)
-        {
-            reihe = 4;
-        }
-        else if (index > 5 && index < 9)
-        {
-            reihe = 5;
-        }
-        else if (index > 10 && index < 15)
-        {
-            reihe = 6;
-        }
-        else if (index > 16 && index < 22)
-        {
-            reihe = 7;
-        }
-        else if (index > 23 && index < 28)
-        {
-            reihe = 6;
-        }
-        else if (index > 29 && index < 33)
-        {
-            reihe = 5;
-        }
-        else if (index > 33 && index < 38)
-        {
-            reihe = 4;
-        }
-
-
-        neighbours[0] = GameObject.Find("Kachel " + (index - reihe).ToString());
-        neighbours[1] = GameObject.Find("Kachel " + (index - reihe + 1).ToString());
-        neighbours[2] = GameObject.Find("Kachel " + (index - 1).ToString());
-        neighbours[3] = GameObject.Find("Kachel " + (index + 1).ToString());
-        neighbours[4] = GameObject.Find("Kachel " + (index + reihe).ToString());
-        neighbours[5] = GameObject.Find("Kachel " + (index + reihe + 1).ToString());
-
-
+        return playerNextField;
     }
 
 

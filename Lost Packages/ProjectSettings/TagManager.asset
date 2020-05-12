@@ -8,6 +8,9 @@ TagManager:
   - Reihe1
   - Paket
   - Holzplanke
+  - Spieler
+  - Background
+  - optionKachel
   layers:
   - Default
   - TransparentFX
