@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7676289074116427347}
   - component: {fileID: 6270071620051707138}
-  - component: {fileID: 2226498312210919888}
+  - component: {fileID: 2590655494173205497}
   m_Layer: 0
   m_Name: Holzplanke
   m_TagString: Holzplanke
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2226498312210919888
+--- !u!114 &2590655494173205497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,9 +91,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5183051222117976795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa58deee1beb4706be385c76c41b456, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a30123142c9d44c8833581ddf9d6603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startIndex: 1
+  startIndex: 0
   index: 0
   next: {fileID: 0}

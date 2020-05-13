@@ -24,7 +24,7 @@ public class SpielerBewegung : MonoBehaviour
         DestroyAllOptional();
         for (int i = 0; i < 3; i++)
         {
-            if (options[i] != null)
+            if (options[i] != null && options[i].GetComponent<Kachel>().clear)
             {
                 felder[i] = Instantiate(optionKachel, options[i].transform.position, Quaternion.Euler(0, 0, 0));
                 felder[i].GetComponent<optionKachel>().index = options[i].GetComponent<Kachel>().index;

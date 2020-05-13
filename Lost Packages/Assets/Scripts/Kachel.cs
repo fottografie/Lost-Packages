@@ -10,21 +10,16 @@ public class Kachel : MonoBehaviour
     public GameObject[] neighbours = new GameObject[6];
     public GameObject flow;
     public GameObject[] playerNextField = new GameObject[3];
+    public bool clear;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log(transform.eulerAngles.z);
+        clear = true;
         string[] nameO = gameObject.name.Split(' ');
         index = int.Parse(nameO[1]);
         _ = Instantiate(pfeil, transform.position, transform.rotation);
         GetFlow();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void GetFlow()
@@ -55,8 +50,6 @@ public class Kachel : MonoBehaviour
         }
 
     }
-
-
 
     public GameObject[] PlayerNextField()
     {

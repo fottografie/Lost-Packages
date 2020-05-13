@@ -14,29 +14,19 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        holz = new GameObject[3];
         setStartPoint();
     }
-
-    //public void OnMouseDown()
-    //{
-    //    GameObject next = GameObject.FindGameObjectWithTag("Paket");
-    //    next.GetComponent<PaketBewegung>().GetToNextField();
-    //
-    //    holz = GameObject.FindGameObjectsWithTag("Holzplanke");
-    //    foreach(GameObject h in holz)
-    //    {
-    //        h.GetComponent<PaketBewegung>().GetToNextField();
-    //    }
-    //
-    //}
 
 
     void setStartPoint()
     {
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
-            parent = GameObject.Find("Kachel " + Mathf.RoundToInt(Random.Range(2, 36)));
-            Instantiate(holzplanke, parent.transform.position, Quaternion.Euler(0, 0, 0));
+            int rand = Mathf.RoundToInt(Random.Range(2, 36));
+            parent = GameObject.Find("Kachel " + rand);
+            holz[i] = Instantiate(holzplanke, parent.transform.position, Quaternion.Euler(0, 0, 0));
+            holz[i].GetComponent<GegenstandBewegung>().index = rand;
         }
 
         parent = GameObject.Find("Kachel 37");
