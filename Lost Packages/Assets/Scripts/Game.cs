@@ -16,11 +16,13 @@ public class Game : MonoBehaviour
     GameObject paketKachel;
     public List<GameObject> options = new List<GameObject>();
     List<GameObject> newOptions = new List<GameObject>();
+    public GameObject[] holzKachel;
 
     // Start is called before the first frame update
     void Start()
     {
         holz = new GameObject[3];
+        holzKachel = new GameObject[holz.Length];
         setStartPoint();
         
         finish = false;
@@ -43,13 +45,15 @@ public class Game : MonoBehaviour
 
         parent = GameObject.Find("Kachel " + spielerStartIndex);
         Instantiate(spieler, parent.transform.position, parent.transform.rotation);
+
+
     }
 
 
-    public void MinimumRounds(GameObject paketKachel_)
+    public void MinimumRounds(GameObject paketKachel_, GameObject[] holzKachel_)
     {
         paketKachel = paketKachel_;
-        
+        holzKachel = holzKachel_;
         
         GetAllOptions();
        
@@ -65,7 +69,14 @@ public class Game : MonoBehaviour
         while (!finish)
         {
             depth++;
-            MinimumRounds(paketKachel.GetComponent<Kachel>().flow);
+
+            //for(int i = 0; i < holzKachel.Length; i++)
+            //{
+            //    Debug.Log(GameObject.Find("Kachel " + holzKachel[i].GetComponent<GegenstandBewegung>().index).GetComponent<Kachel>().flow);
+            //    holzKachel[i] = GameObject.Find("Kachel " + holzKachel[i].GetComponent<GegenstandBewegung>().index).GetComponent<Kachel>().flow;
+            //}
+
+            MinimumRounds(paketKachel.GetComponent<Kachel>().flow, holzKachel);
         }
     }
 
@@ -92,7 +103,13 @@ public class Game : MonoBehaviour
                 PlayerNextField = o.GetComponent<Kachel>().PlayerNextField();
                 if (o.GetComponent<Kachel>().playerNextField[i] != null)
                 {
-                    newOptions.Add(PlayerNextField[i]);
+                    //for(int j = 0; j < holzKachel.Length; j++)
+                    //{
+                    //    if (o.GetComponent<Kachel>().playerNextField[i] != holzKachel[j])
+                    //    {
+                            newOptions.Add(o.GetComponent<Kachel>().playerNextField[i]);
+                    //    }
+                    //}
                 }
                 
             }

@@ -96,8 +96,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionKachel: {fileID: 4851008466919434495, guid: ce89e5df1b0d445cf8e10f06a030150c,
     type: 3}
-  optionKachelrot: {fileID: 1235871180643050440, guid: 6024f9ca15d9a4a74b6e9a3763a82440,
+  optionPfeil: {fileID: 7135651980609093107, guid: fba1ddc3c8300477a9caeb4c7e2045af,
     type: 3}
+  angle: 0
   options:
   - {fileID: 0}
   - {fileID: 0}
@@ -107,3 +108,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   index: 0
+  minimumRounds: 0
+  minimumOptions: []
+  holzKachel: []

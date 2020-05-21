@@ -20,6 +20,7 @@ public class Kachel : MonoBehaviour
         index = int.Parse(nameO[1]);
         _ = Instantiate(pfeil, transform.position, transform.rotation);
         GetFlow();
+
     }
 
     void GetFlow()
@@ -50,6 +51,39 @@ public class Kachel : MonoBehaviour
         }
 
     }
+
+
+
+    public GameObject GetOption(float z)
+    {
+        if (z > -1 && z < 1)
+        {
+            return neighbours[3];
+        }
+        else if (z > 59 && z < 61 && neighbours[1] != null)
+        {
+            return neighbours[1];
+        }
+        else if (z > 119 && z < 121 && neighbours[0] != null)
+        {
+            return neighbours[0];
+        }
+        else if (z == 180 && neighbours[2] != null)
+        {
+            return neighbours[2];
+        }
+        else if (z == 240 && neighbours[4] != null)
+        {
+            return neighbours[4];
+        }
+        else if (z == 300 && neighbours[5] != null)
+        {
+            return neighbours[5];
+        }
+        return null;
+    }
+
+
 
     public GameObject[] PlayerNextField()
     {

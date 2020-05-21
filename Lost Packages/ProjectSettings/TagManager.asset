@@ -11,6 +11,7 @@ TagManager:
   - Spieler
   - Background
   - optionKachel
+  - KachelBelegt
   layers:
   - Default
   - TransparentFX
