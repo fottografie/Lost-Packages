@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa58deee1beb4706be385c76c41b456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startIndex: 37
   index: 0
   next: {fileID: 0}
+  belegtPaket: {fileID: 876181058327076165, guid: 7d9975f052c7a41698bd06654991adfb,
+    type: 3}

@@ -7,17 +7,8 @@ using UnityEngine.SceneManagement;
 public class optionKachel : MonoBehaviour
 {
     public int index;
-    public GameObject Kachelbelegt;
-    private GameObject[] KachelnBelegt;
-    //public GameObject[] kacheln;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //  kacheln = GameObject.FindGameObjectsWithTag("Kachel");
-        KachelnBelegt = new GameObject[4];
-    }
-
+    //Wenn der Spieler auf eines der options Felder geklickt hat, werden alle Gegenstände, das Paket und der Spieler ein Feld weiter gesetzt
     private void OnMouseDown()
     {
         GameObject[] holz = GameObject.FindGameObjectsWithTag("Holzplanke");
@@ -30,32 +21,24 @@ public class optionKachel : MonoBehaviour
         GameObject.FindGameObjectWithTag("Spieler").transform.position = transform.position;
         GameObject.FindGameObjectWithTag("Spieler").transform.rotation = GameObject.Find("Kachel " + index).transform.rotation;
 
-        GameObject.FindGameObjectWithTag("Background").GetComponent<Game>().spielerStartIndex = index;
+        GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().spielerStartIndex = index;
         GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index = index;
-        GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().ShowOptions();
         GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().GetToNextField();
-
-
-        if(GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index == GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index)
+        GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().ShowOptions();
+        GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().SetZuege(-1);
+        if(GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().GetZuege() < 1)
         {
-            Debug.Log("GEWONNEN");
+            Debug.Log("VERLOREN!");
+            SceneManager.LoadScene("Loose", LoadSceneMode.Single);
+        }
+        GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().ShowZuege();
+
+
+        //Überprüfung ob der Spieler gewonnen hat (ob er auf dem gleichen Feld wie das Paket steht)
+        if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index == GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index)
+        {
+            Debug.Log("GEWONNEN!");
             SceneManager.LoadScene("Win", LoadSceneMode.Single);
-        }
-
-
-
-
-        KachelnBelegt = GameObject.FindGameObjectsWithTag("KachelBelegt");
-        for (int k = 0; k < KachelnBelegt.Length; k++)
-        {
-            DestroyImmediate(KachelnBelegt[k], true); 
-        }
-            for (int j = 1; j < 38; j++)
-        {
-            if (!GameObject.Find("Kachel " + j).GetComponent<Kachel>().clear)
-            {
-                Instantiate(Kachelbelegt, GameObject.Find("Kachel " + j).GetComponent<Kachel>().transform.position, GameObject.Find("Kachel " + j).GetComponent<Kachel>().transform.rotation);
-            } 
         }
 
     }

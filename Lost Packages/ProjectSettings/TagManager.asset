@@ -12,6 +12,7 @@ TagManager:
   - Background
   - optionKachel
   - KachelBelegt
+  - belegtPaket
   layers:
   - Default
   - TransparentFX

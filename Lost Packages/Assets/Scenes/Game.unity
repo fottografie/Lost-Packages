@@ -1467,12 +1467,12 @@ GameObject:
   - component: {fileID: 424508987}
   - component: {fileID: 424508986}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ZuegeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &424508985
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1489,7 +1489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -535, y: -52.03}
+  m_AnchoredPosition: {x: -560, y: -60}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &424508986
@@ -1511,19 +1511,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: 8cbc84022a8c6414fa23e5b1e71ea34c, type: 3}
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 4
     m_MaxSize: 50
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Test 123
+  m_Text: "Verbleibende Z\xFCge 10"
 --- !u!222 &424508987
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1538,38 +1538,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 894112196}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &488684390 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8253795206996726098, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
-    type: 3}
-  m_PrefabInstance: {fileID: 8253795207451781684}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &488684391
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 488684390}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 16, y: 9}
-    newSize: {x: 32, y: 18}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 16, y: 9}
-  m_EdgeRadius: 0
 --- !u!1 &489819119 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5298586997365516872, guid: 20e95009e303045e7a90a2a9a201d71a,
@@ -5453,21 +5421,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7576991094396843440, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
-        type: 3}
-      propertyPath: spielerIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7576991094396843440, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
-        type: 3}
-      propertyPath: spielerStartIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7576991094396843440, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
-        type: 3}
-      propertyPath: paketStartIndex
-      value: 37
-      objectReference: {fileID: 0}
     - target: {fileID: 8253795206996726098, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
         type: 3}
       propertyPath: m_Name
@@ -5527,6 +5480,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130198945827556330, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
+        type: 3}
+      propertyPath: spielerIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130198945827556330, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
+        type: 3}
+      propertyPath: paketIndex
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130198945827556330, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
+        type: 3}
+      propertyPath: anzahlHolz
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130198945827556330, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
+        type: 3}
+      propertyPath: zuegeLabel
+      value: 
+      objectReference: {fileID: 424508986}
+    - target: {fileID: 9130198945827556330, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
+        type: 3}
+      propertyPath: zuege
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd, type: 3}

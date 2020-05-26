@@ -4,41 +4,43 @@ using UnityEngine;
 
 public class PaketBewegung : MonoBehaviour
 {
-    public int startIndex;
     public int index;
     public GameObject next;
-    public GameObject old;
-    public bool nextFieldClear;
+    private GameObject old;
+
+    public GameObject belegtPaket;
 
     // Start is called before the first frame update
     void Start()
     {
-        index = startIndex;
-        
         GetFlowFromIndex();
     }
 
+    //Setzt next auf das Feld in Flussrichtung, wenn es nich von einem Gegenstand belegt ist und setzt das nächste Feld auf package = true
     void GetFlowFromIndex()
     {
         old = next;
-        GameObject f = GameObject.Find("Kachel " + index);
-        next = f.GetComponent<Kachel>().flow;
-        if(next.GetComponent<Kachel>().clear == false)
+        next = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
+        if (next.GetComponent<Kachel>().clear == false)
         {
             next = old;
         }
-        else
-        {
-            next.GetComponent<Kachel>().clear = false;
-        }
+        next.GetComponent<Kachel>().clear = false;
+        next.GetComponent<Kachel>().package = true;
+
+        Instantiate(belegtPaket, next.transform.position, Quaternion.identity);
     }
 
-
+    //Der Gegenstand wird auf das nächste Feld gesetzt, die alten belegten Kacheln werden entfernt und das GetFlowFromIndex wird erneut aufgerufen
     public void GetToNextField()
     {
         transform.position = next.transform.position;
         index = next.GetComponent<Kachel>().index;
         GameObject.Find("Kachel " + index).GetComponent<Kachel>().clear = true;
+        GameObject.Find("Kachel " + index).GetComponent<Kachel>().package = false;
+        
+        DestroyImmediate(GameObject.FindGameObjectWithTag("belegtPaket"), true);
+
         GetFlowFromIndex();
     }
 

@@ -5,24 +5,34 @@ using UnityEngine;
 
 public class Kachel : MonoBehaviour
 {
-    public GameObject pfeil;
     public int index;
-    public GameObject[] neighbours = new GameObject[6];
-    public GameObject flow;
-    public GameObject[] playerNextField = new GameObject[3];
     public bool clear;
+    public bool package;
+
+    public GameObject pfeil;
+    public GameObject[] neighbours = new GameObject[6];
+
+    public GameObject flow;
 
     // Start is called before the first frame update
     void Start()
     {
-        clear = true;
-        string[] nameO = gameObject.name.Split(' ');
-        index = int.Parse(nameO[1]);
-        _ = Instantiate(pfeil, transform.position, transform.rotation);
+        SetIndex();
+        Instantiate(pfeil, transform.position, transform.rotation);
         GetFlow();
-
     }
 
+    //Setzt den Index der Kachel auf den Namen des GameObjects
+    void SetIndex()
+    {
+        string[] nameO = gameObject.name.Split(' ');
+        index = int.Parse(nameO[1]);
+        clear = true;
+        package = false;
+    }
+
+
+    //Berechnet abhängig von der Drehung der Kachel das nächste Feld in Flussrichtung
     void GetFlow()
     {
         if (transform.eulerAngles.z == 0)
@@ -53,63 +63,33 @@ public class Kachel : MonoBehaviour
     }
 
 
-
-    public GameObject GetOption(float z)
-    {
-        if (z > -1 && z < 1)
-        {
-            return neighbours[3];
-        }
-        else if (z > 59 && z < 61 && neighbours[1] != null)
-        {
-            return neighbours[1];
-        }
-        else if (z > 119 && z < 121 && neighbours[0] != null)
-        {
-            return neighbours[0];
-        }
-        else if (z == 180 && neighbours[2] != null)
-        {
-            return neighbours[2];
-        }
-        else if (z == 240 && neighbours[4] != null)
-        {
-            return neighbours[4];
-        }
-        else if (z == 300 && neighbours[5] != null)
-        {
-            return neighbours[5];
-        }
-        return null;
-    }
-
-
-
+    //Berechnet anhandt der Drehnung der Kachel die Optionsfelder des Spielers
     public GameObject[] PlayerNextField()
     {
+        GameObject[] playerNextField = new GameObject[3];
         if (transform.eulerAngles.z == 0)
         {
-            playerNextField[0] = neighbours[1];
+            playerNextField[0] = neighbours[5];
             playerNextField[1] = neighbours[3];
-            playerNextField[2] = neighbours[5];
+            playerNextField[2] = neighbours[1];
         }
         else if (transform.eulerAngles.z > 59 && transform.eulerAngles.z < 61)
         {
-            playerNextField[0] = neighbours[0];
+            playerNextField[0] = neighbours[3];
             playerNextField[1] = neighbours[1];
-            playerNextField[2] = neighbours[3];
+            playerNextField[2] = neighbours[0];
         }
         else if (transform.eulerAngles.z > 119 && transform.eulerAngles.z < 121)
         {
-            playerNextField[0] = neighbours[2];
+            playerNextField[0] = neighbours[1];
             playerNextField[1] = neighbours[0];
-            playerNextField[2] = neighbours[1];
+            playerNextField[2] = neighbours[2];
         }
         else if (transform.eulerAngles.z == 180)
         {
-            playerNextField[0] = neighbours[4];
+            playerNextField[0] = neighbours[0];
             playerNextField[1] = neighbours[2];
-            playerNextField[2] = neighbours[0];
+            playerNextField[2] = neighbours[4];
         }
         else if (transform.eulerAngles.z == 240)
         {
@@ -123,9 +103,7 @@ public class Kachel : MonoBehaviour
             playerNextField[1] = neighbours[5];
             playerNextField[2] = neighbours[3];
         }
-
         return playerNextField;
     }
-
 
 }

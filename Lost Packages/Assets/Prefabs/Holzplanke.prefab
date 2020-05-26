@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a30123142c9d44c8833581ddf9d6603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startIndex: 0
   index: 0
   next: {fileID: 0}
+  belegtHolz: {fileID: 6946023892275767005, guid: 7044965d8ae0e4895b31049e4ce421ba,
+    type: 3}
