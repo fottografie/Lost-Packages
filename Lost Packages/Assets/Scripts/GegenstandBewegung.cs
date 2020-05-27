@@ -8,7 +8,8 @@ public class GegenstandBewegung : MonoBehaviour
     public GameObject next;
     private GameObject old;
 
-    public GameObject belegtHolz;
+    public GameObject belegtHolzObject;
+    private GameObject belegtHolz;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class GegenstandBewegung : MonoBehaviour
     //Setzt next auf das Feld in Flussrichtung, wenn es nich von einem Gegenstand belegt ist und instantiiert darauf ein belegt-Feld
     void GetFlowFromIndex()
     {
+        next = GameObject.Find("Kachel " + index);
         old = next;
         next = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
         if (next.GetComponent<Kachel>().clear == false)
@@ -27,21 +29,28 @@ public class GegenstandBewegung : MonoBehaviour
         }
         next.GetComponent<Kachel>().clear = false;
 
-        Instantiate(belegtHolz, next.transform.position, Quaternion.identity);
+        belegtHolz = Instantiate(belegtHolzObject, next.transform.position, Quaternion.Euler(0, 0, 0));
     }
 
     //Der Gegenstand wird auf das nächste Feld gesetzt, die alten belegten Kacheln werden entfernt und das GetFlowFromIndex wird erneut aufgerufen
     public void GetToNextField()
     {
+        if (GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlowBool)
+        {
+            GameObject temp = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
+            GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow = GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlow;
+            GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlow = temp;
+
+            GameObject.Find("Kachel " + index).GetComponent<Kachel>().ChangePfeil();
+        }
+
+
         transform.position = next.transform.position;
         index = next.GetComponent<Kachel>().index;
         GameObject.Find("Kachel " + index).GetComponent<Kachel>().clear = true;
 
-        GameObject[] KachelnBelegt = GameObject.FindGameObjectsWithTag("KachelBelegt");
-        for (int k = 0; k < KachelnBelegt.Length; k++)
-        {
-            DestroyImmediate(KachelnBelegt[k], true);
-        }
+        DestroyImmediate(belegtHolz, true);
+
         GetFlowFromIndex();
     }
 

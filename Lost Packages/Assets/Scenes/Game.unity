@@ -2010,6 +2010,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2372962407681523304, guid: 6e82a54ab7b86400e98f9f12ad13272a,
         type: 3}
+    - target: {fileID: 2173214021681764632, guid: 20e95009e303045e7a90a2a9a201d71a,
+        type: 3}
+      propertyPath: altFlowBool
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2173214021681764632, guid: 20e95009e303045e7a90a2a9a201d71a,
+        type: 3}
+      propertyPath: altFlowAngle
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 5298586997365516872, guid: 20e95009e303045e7a90a2a9a201d71a,
         type: 3}
       propertyPath: m_Name
@@ -3478,6 +3488,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2372962407681523304, guid: 6e82a54ab7b86400e98f9f12ad13272a,
         type: 3}
+    - target: {fileID: 2173214021681764632, guid: 20e95009e303045e7a90a2a9a201d71a,
+        type: 3}
+      propertyPath: altFlowBool
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2173214021681764632, guid: 20e95009e303045e7a90a2a9a201d71a,
+        type: 3}
+      propertyPath: altFlowAngle
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 5298586997365516872, guid: 20e95009e303045e7a90a2a9a201d71a,
         type: 3}
       propertyPath: m_Name
@@ -3583,6 +3603,16 @@ PrefabInstance:
       propertyPath: neighbours.Array.data[5]
       value: 
       objectReference: {fileID: 752253929}
+    - target: {fileID: 2173214021681764632, guid: 20e95009e303045e7a90a2a9a201d71a,
+        type: 3}
+      propertyPath: altFlowAngle
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 2173214021681764632, guid: 20e95009e303045e7a90a2a9a201d71a,
+        type: 3}
+      propertyPath: altFlowBool
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5298586997365516872, guid: 20e95009e303045e7a90a2a9a201d71a,
         type: 3}
       propertyPath: m_Name
@@ -5494,7 +5524,7 @@ PrefabInstance:
     - target: {fileID: 9130198945827556330, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
         type: 3}
       propertyPath: anzahlHolz
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9130198945827556330, guid: 15a1e0c3af5ae4b8aba1f5d7be14febd,
         type: 3}

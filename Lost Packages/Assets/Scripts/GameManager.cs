@@ -41,11 +41,11 @@ public class GameManager : MonoBehaviour
         holz = new GameObject[anzahlHolz];
         GameObject parent;
 
+        holzStartIndex = new int[anzahlHolz];
+        holzStartIndex = PickSpots(anzahlHolz);
+
         for (int i = 0; i < holz.Length; i++)
         {
-            holzStartIndex = new int[anzahlHolz];
-            holzStartIndex = PickSpots(anzahlHolz);
-
             parent = GameObject.Find("Kachel " + holzStartIndex[i]);
             holz[i] = Instantiate(holzplanke, parent.transform.position, Quaternion.Euler(0, 0, 0));
             holz[i].GetComponent<GegenstandBewegung>().index = holzStartIndex[i];
@@ -72,9 +72,15 @@ public class GameManager : MonoBehaviour
 
         gegenstandSpots[spielerStartIndex] = 0;
 
+
         int rand = Random.Range(0, 8);
         paketStartIndex = paketRandomStartSpots[rand];
         gegenstandSpots[paketStartIndex] = 0;
+
+        string[] nameO = GameObject.Find("Kachel " + paketStartIndex).GetComponent<Kachel>().GetFlow((int)GameObject.Find("Kachel " + paketStartIndex).GetComponent<Kachel>().transform.rotation.eulerAngles.z).GetComponent<Kachel>().name.Split(' ');
+
+        int tempIndex = int.Parse(nameO[1]);
+        gegenstandSpots[tempIndex] = 0;
     }
 
 
@@ -93,6 +99,12 @@ public class GameManager : MonoBehaviour
             {
                 spots[j] = rand;
                 gegenstandSpots[rand] = 0;
+
+                string[] nameO = GameObject.Find("Kachel " + rand).GetComponent<Kachel>().GetFlow((int)GameObject.Find("Kachel " + rand).GetComponent<Kachel>().transform.rotation.eulerAngles.z).GetComponent<Kachel>().name.Split(' ');
+
+                int tempIndex = int.Parse(nameO[1]);
+                gegenstandSpots[tempIndex] = 0;
+
                 j++;
             }
         }
@@ -103,7 +115,7 @@ public class GameManager : MonoBehaviour
     //Zuganzeige
     public void SetZuege(int value)
     {
-        zuege = zuege + value;
+        zuege += value;
     }
 
     public int GetZuege()

@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 3ed294b0b9ed44207ab1827adb8d8c17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,5 +96,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   next: {fileID: 0}
-  belegtHolz: {fileID: 6946023892275767005, guid: 7044965d8ae0e4895b31049e4ce421ba,
+  belegtHolzObject: {fileID: 6946023892275767005, guid: 7044965d8ae0e4895b31049e4ce421ba,
     type: 3}

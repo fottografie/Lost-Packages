@@ -19,6 +19,7 @@ public class PaketBewegung : MonoBehaviour
     //Setzt next auf das Feld in Flussrichtung, wenn es nich von einem Gegenstand belegt ist und setzt das nächste Feld auf package = true
     void GetFlowFromIndex()
     {
+        next = GameObject.Find("Kachel " + index);
         old = next;
         next = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
         if (next.GetComponent<Kachel>().clear == false)
@@ -34,6 +35,17 @@ public class PaketBewegung : MonoBehaviour
     //Der Gegenstand wird auf das nächste Feld gesetzt, die alten belegten Kacheln werden entfernt und das GetFlowFromIndex wird erneut aufgerufen
     public void GetToNextField()
     {
+        if (GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlowBool)
+        {
+            GameObject temp = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
+            GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow = GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlow;
+            GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlow = temp;
+
+            GameObject.Find("Kachel " + index).GetComponent<Kachel>().ChangePfeil();
+        }
+
+
+
         transform.position = next.transform.position;
         index = next.GetComponent<Kachel>().index;
         GameObject.Find("Kachel " + index).GetComponent<Kachel>().clear = true;

@@ -8,13 +8,13 @@ public class SpielerBewegung : MonoBehaviour
     public GameObject optionPfeil;
 
     public GameObject[] options = new GameObject[3];
-    public GameObject[] felder = new GameObject[3];
+    private GameObject[] felder = new GameObject[3];
 
     public int index;
     public int minimumRounds;
-    public GameObject[] minimumOptions;
+    private GameObject[] minimumOptions;
 
-    public GameObject[] holzKachel;
+    private GameObject[] holzKachel;
 
 
     // Start is called before the first frame update
@@ -56,7 +56,8 @@ public class SpielerBewegung : MonoBehaviour
     public void ShowOptions()
     {
         options = GameObject.Find("Kachel " + index).GetComponent<Kachel>().PlayerNextField();
-        float angle = GameObject.Find("Kachel " + index).transform.eulerAngles.z;
+        //Debug.Log(GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle);
+        float angle = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle;
         GameObject[] felder = new GameObject[3];
 
         DestroyAllOptional();

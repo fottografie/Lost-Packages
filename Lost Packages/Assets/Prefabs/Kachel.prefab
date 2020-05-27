@@ -94,10 +94,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48f261bf4e694774b50211933575b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfeil: {fileID: 2372962407681523304, guid: 6e82a54ab7b86400e98f9f12ad13272a, type: 3}
-  Kachelbelegt: {fileID: 6946023892275767005, guid: 7044965d8ae0e4895b31049e4ce421ba,
-    type: 3}
   index: 0
+  clear: 0
+  package: 0
+  pfeilObject: {fileID: 2372962407681523304, guid: 6e82a54ab7b86400e98f9f12ad13272a,
+    type: 3}
   neighbours:
   - {fileID: 0}
   - {fileID: 0}
@@ -106,8 +107,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   flow: {fileID: 0}
-  playerNextField:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  clear: 0
+  altPfeilObject: {fileID: 4143569002863587185, guid: b72e352c2c5e34ed7b94d608244082bd,
+    type: 3}
+  altFlowAngle: 0
+  altFlowBool: 0
+  altFlow: {fileID: 0}

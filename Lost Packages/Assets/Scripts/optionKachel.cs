@@ -7,10 +7,23 @@ using UnityEngine.SceneManagement;
 public class optionKachel : MonoBehaviour
 {
     public int index;
+    private int spielerIndex;
 
     //Wenn der Spieler auf eines der options Felder geklickt hat, werden alle Gegenstände, das Paket und der Spieler ein Feld weiter gesetzt
     private void OnMouseDown()
     {
+        spielerIndex = GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index;
+
+        if (GameObject.Find("Kachel " + spielerIndex).GetComponent<Kachel>().altFlowBool)
+        {
+            GameObject temp = GameObject.Find("Kachel " + spielerIndex).GetComponent<Kachel>().flow;
+            GameObject.Find("Kachel " + spielerIndex).GetComponent<Kachel>().flow = GameObject.Find("Kachel " + spielerIndex).GetComponent<Kachel>().altFlow;
+            GameObject.Find("Kachel " + spielerIndex).GetComponent<Kachel>().altFlow = temp;
+
+            GameObject.Find("Kachel " + spielerIndex).GetComponent<Kachel>().ChangePfeil();
+        }
+
+
         GameObject[] holz = GameObject.FindGameObjectsWithTag("Holzplanke");
         for (int i = 0; i < holz.Length; i++)
         {
@@ -19,14 +32,16 @@ public class optionKachel : MonoBehaviour
         }
 
         GameObject.FindGameObjectWithTag("Spieler").transform.position = transform.position;
-        GameObject.FindGameObjectWithTag("Spieler").transform.rotation = GameObject.Find("Kachel " + index).transform.rotation;
+        GameObject.FindGameObjectWithTag("Spieler").transform.rotation = Quaternion.Euler(0, 0, GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle);
 
-        GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().spielerStartIndex = index;
+        //GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().spielerIndex = index;
         GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index = index;
         GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().GetToNextField();
         GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().ShowOptions();
         GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().SetZuege(-1);
-        if(GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().GetZuege() < 1)
+
+
+        if (GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().GetZuege() < 1)
         {
             Debug.Log("VERLOREN!");
             SceneManager.LoadScene("Loose", LoadSceneMode.Single);
