@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] holz;
 
     private int[] gegenstandSpots;
+    public int[] belegteFelder;
 
     public GameObject spieler;
     public GameObject paket;
@@ -32,6 +33,9 @@ public class GameManager : MonoBehaviour
         GegenstandSpotsInit();
         GameInit();
         ShowZuege();
+        paketIndex = paketStartIndex;
+        spielerIndex = spielerStartIndex;
+        belegteFelder = gegenstandSpots;
     }
 
 
@@ -126,6 +130,28 @@ public class GameManager : MonoBehaviour
     public void ShowZuege()
     {
         zuegeLabel.GetComponent<Text>().text = "Verbleibende Züge " + zuege;
+    }
+
+
+
+    public void SetBelegteFelder()
+    {
+        for(int i = 0; i < belegteFelder.Length; i++)
+        {
+            belegteFelder[i] = i;
+        }
+
+        belegteFelder[spielerIndex] = 0;
+        belegteFelder[paketIndex] = 0;
+        belegteFelder[GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().next.GetComponent<Kachel>().index] = 0;
+
+        GameObject[] Hoelzer = GameObject.FindGameObjectsWithTag("Holzplanke");
+        for (int j = 0; j < Hoelzer.Length; j++)
+        {
+            belegteFelder[Hoelzer[j].GetComponent<GegenstandBewegung>().index] = 0;
+            belegteFelder[Hoelzer[j].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index] = 0;
+        }
+
     }
 
 }

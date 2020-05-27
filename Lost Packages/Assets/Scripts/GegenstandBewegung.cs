@@ -11,6 +11,9 @@ public class GegenstandBewegung : MonoBehaviour
     public GameObject belegtHolzObject;
     private GameObject belegtHolz;
 
+    public GameObject belegtHolzPfeilObject;
+    private GameObject belegtHolzPfeil;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,10 @@ public class GegenstandBewegung : MonoBehaviour
         next.GetComponent<Kachel>().clear = false;
 
         belegtHolz = Instantiate(belegtHolzObject, next.transform.position, Quaternion.Euler(0, 0, 0));
+        if (next != GameObject.Find("Kachel " + index) && !GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool)
+        {
+            belegtHolzPfeil = Instantiate(belegtHolzPfeilObject, transform.position, GameObject.Find("Kachel " + index).transform.rotation);
+        }
     }
 
     //Der Gegenstand wird auf das nächste Feld gesetzt, die alten belegten Kacheln werden entfernt und das GetFlowFromIndex wird erneut aufgerufen
@@ -50,6 +57,7 @@ public class GegenstandBewegung : MonoBehaviour
         GameObject.Find("Kachel " + index).GetComponent<Kachel>().clear = true;
 
         DestroyImmediate(belegtHolz, true);
+        DestroyImmediate(belegtHolzPfeil, true);
 
         GetFlowFromIndex();
     }

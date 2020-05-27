@@ -102,8 +102,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  Kachelbelegt: {fileID: 6946023892275767005, guid: 7044965d8ae0e4895b31049e4ce421ba,
-    type: 3}
 --- !u!58 &5198397722242958860
 CircleCollider2D:
   m_ObjectHideFlags: 0

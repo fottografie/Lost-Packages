@@ -12,6 +12,16 @@ public class optionKachel : MonoBehaviour
     //Wenn der Spieler auf eines der options Felder geklickt hat, werden alle Gegenstände, das Paket und der Spieler ein Feld weiter gesetzt
     private void OnMouseDown()
     {
+
+        for (int j = 1; j < 38; j++)
+        {
+            if (GameObject.Find("Kachel " + j).GetComponent<Kachel>().strudelBool)
+            {
+                GameObject.Find("Kachel " + j).GetComponent<Kachel>().PickRandomFlow();
+            }
+        }
+
+
         spielerIndex = GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index;
 
         if (GameObject.Find("Kachel " + spielerIndex).GetComponent<Kachel>().altFlowBool)
@@ -39,6 +49,13 @@ public class optionKachel : MonoBehaviour
         GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().GetToNextField();
         GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().ShowOptions();
         GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().SetZuege(-1);
+
+        GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().spielerIndex = index;
+        GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().paketIndex = GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index;
+        GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().SetBelegteFelder();
+
+
+
 
 
         if (GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().GetZuege() < 1)

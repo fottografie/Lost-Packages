@@ -22,17 +22,28 @@ public class Kachel : MonoBehaviour
     public bool altFlowBool;
     public GameObject altFlow;
 
+    public bool strudelBool;
+    public GameObject strudelObject;
+    private GameObject strudel;
+
     // Start is called before the first frame update
     void Start()
     {
         SetIndex();
         flowAngle = (int)transform.rotation.eulerAngles.z;
-        pfeil = Instantiate(pfeilObject, transform.position, transform.rotation);
+        if (!strudelBool)
+        {
+            pfeil = Instantiate(pfeilObject, transform.position, transform.rotation);
+        }
         flow = GetFlow((int)transform.eulerAngles.z);
         if (altFlowBool)
         {
             altFlow = GetFlow(altFlowAngle);
             altPfeil = Instantiate(altPfeilObject, transform.position, Quaternion.Euler(0, 0, altFlowAngle));
+        }
+        if (strudelBool)
+        {
+            Instantiate(strudelObject, transform.position, Quaternion.identity);
         }
     }
 
@@ -63,39 +74,45 @@ public class Kachel : MonoBehaviour
     public GameObject GetFlow(int z)
     {
         GameObject flow_;
-        if (z == 0)
+        if (z == 0 && !strudelBool)
         {
             flow_ = neighbours[3];
             return flow_;
         }
-        else if (z > 59 && z < 61)
+        else if (z > 59 && z < 61 && !strudelBool)
         {
             flow_ = neighbours[1];
             return flow_;
         }
-        else if (z > 119 && z < 121)
+        else if (z > 119 && z < 121 && !strudelBool)
         {
             flow_ = neighbours[0];
             return flow_;
         }
-        else if (z == 180)
+        else if (z == 180 && !strudelBool)
         {
             flow_ = neighbours[2];
             return flow_;
         }
-        else if (z == 240)
+        else if (z == 240 && !strudelBool)
         {
             flow_ = neighbours[4];
             return flow_;
         }
-        else if (z == 300)
+        else if (z == 300 && !strudelBool)
         {
             flow_ = neighbours[5];
             return flow_;
         }
-        Debug.Log(flow);
-        return null;
+        else if (strudelBool)
+        {
+            int rand = UnityEngine.Random.Range(1, 37);
+            flow_ = GameObject.Find("Kachel " + rand);
+            strudel = Instantiate(strudelObject, GameObject.Find("Kachel " + rand).transform.position, GameObject.Find("Kachel " + rand).transform.rotation);
 
+            return flow_;
+        }
+        return null;
     }
 
 
@@ -103,43 +120,73 @@ public class Kachel : MonoBehaviour
     public GameObject[] PlayerNextField()
     {
         GameObject[] playerNextField = new GameObject[3];
-        if (flowAngle == 0)
+        if (flowAngle == 0 && !strudelBool)
         {
             playerNextField[0] = neighbours[5];
             playerNextField[1] = neighbours[3];
             playerNextField[2] = neighbours[1];
         }
-        else if (flowAngle > 59 && flowAngle < 61)
+        else if (flowAngle > 59 && flowAngle < 61 && !strudelBool)
         {
             playerNextField[0] = neighbours[3];
             playerNextField[1] = neighbours[1];
             playerNextField[2] = neighbours[0];
         }
-        else if (flowAngle > 119 && flowAngle < 121)
+        else if (flowAngle > 119 && flowAngle < 121 && !strudelBool)
         {
             playerNextField[0] = neighbours[1];
             playerNextField[1] = neighbours[0];
             playerNextField[2] = neighbours[2];
         }
-        else if (flowAngle == 180)
+        else if (flowAngle == 180 && !strudelBool)
         {
             playerNextField[0] = neighbours[0];
             playerNextField[1] = neighbours[2];
             playerNextField[2] = neighbours[4];
         }
-        else if (flowAngle == 240)
+        else if (flowAngle == 240 && !strudelBool)
         {
             playerNextField[0] = neighbours[2];
             playerNextField[1] = neighbours[4];
             playerNextField[2] = neighbours[5];
         }
-        else if (flowAngle == 300)
+        else if (flowAngle == 300 && !strudelBool)
         {
             playerNextField[0] = neighbours[4];
             playerNextField[1] = neighbours[5];
             playerNextField[2] = neighbours[3];
         }
+        else if (strudelBool)
+        {
+            playerNextField[0] = flow;
+            playerNextField[1] = null;
+            playerNextField[2] = null;
+        }
+
         return playerNextField;
     }
+
+
+    public void PickRandomFlow()
+    {
+        int rand = UnityEngine.Random.Range(1, 37);
+
+        while(GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand] == 0)
+        {
+            if(GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand] != 0)
+            {
+                flow = GameObject.Find("Kachel " + GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand]);
+            }
+            else
+            {
+                rand = UnityEngine.Random.Range(1, 37);
+            }
+        }
+        DestroyImmediate(strudel, true);
+
+        GameObject parent = GameObject.Find("Kachel " + GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand]);
+        flow = parent;
+        strudel = Instantiate(strudelObject, parent.transform.position, parent.transform.rotation);
+    } 
 
 }

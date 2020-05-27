@@ -56,7 +56,6 @@ public class SpielerBewegung : MonoBehaviour
     public void ShowOptions()
     {
         options = GameObject.Find("Kachel " + index).GetComponent<Kachel>().PlayerNextField();
-        //Debug.Log(GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle);
         float angle = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle;
         GameObject[] felder = new GameObject[3];
 
@@ -68,7 +67,10 @@ public class SpielerBewegung : MonoBehaviour
             felder[0] = Instantiate(optionKachel, options[0].transform.position, Quaternion.Euler(0, 0, 0));
             felder[0].GetComponent<optionKachel>().index = options[0].GetComponent<Kachel>().index;
             float pi = (angle + 300) % 360;
-            Instantiate(optionPfeil, transform.position, Quaternion.Euler(0, 0, pi));
+            if (!GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool)
+            {
+                Instantiate(optionPfeil, transform.position, Quaternion.Euler(0, 0, pi));
+            }
         }
 
         //Option-Pfeil + -Kachel in der Flussrichtung

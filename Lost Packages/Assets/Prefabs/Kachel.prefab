@@ -107,8 +107,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   flow: {fileID: 0}
+  flowAngle: 0
   altPfeilObject: {fileID: 4143569002863587185, guid: b72e352c2c5e34ed7b94d608244082bd,
     type: 3}
   altFlowAngle: 0
   altFlowBool: 0
   altFlow: {fileID: 0}
+  strudelBool: 0
+  strudelObject: {fileID: 4482487659309733551, guid: 1f6211c3651154371b30667c441a72cb,
+    type: 3}
