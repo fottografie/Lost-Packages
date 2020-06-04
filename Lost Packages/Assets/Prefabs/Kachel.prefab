@@ -114,5 +114,7 @@ MonoBehaviour:
   altFlowBool: 0
   altFlow: {fileID: 0}
   strudelBool: 0
-  strudelObject: {fileID: 4482487659309733551, guid: 1f6211c3651154371b30667c441a72cb,
+  strudelObject: {fileID: 6376324333053372829, guid: 426fae9551e65414a99aea2841271c3b,
     type: 3}
+  stoneBool: 0
+  stone: {fileID: 3721236038831746277, guid: c369f267c2fc44e84b73ac9e50592675, type: 3}

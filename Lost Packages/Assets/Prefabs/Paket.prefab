@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2308597074181197133}
   - component: {fileID: 4112377408807965570}
   - component: {fileID: 2235950006272244815}
+  - component: {fileID: 1033610775187372599}
   m_Layer: 0
   m_Name: Paket
   m_TagString: Paket
@@ -98,3 +99,29 @@ MonoBehaviour:
   next: {fileID: 0}
   belegtPaket: {fileID: 876181058327076165, guid: 7d9975f052c7a41698bd06654991adfb,
     type: 3}
+  belegtPaketPfeil: {fileID: 3235315714427536503, guid: 4d6aaa8d764314824bac82d2629ef1f5,
+    type: 3}
+  start: {x: 0, y: 0, z: 0}
+  ende: {x: 0, y: 0, z: 0}
+  richtung: {x: 0, y: 0, z: 0}
+  strudelAnimation: {fileID: 8471216788786131374, guid: 5dd89253311424009bf9e69be7d6377a,
+    type: 3}
+--- !u!95 &1033610775187372599
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7772469394045602620}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f42151a1fa20b4296a245638e1a8df9e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

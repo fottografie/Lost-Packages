@@ -12,16 +12,6 @@ public class optionKachel : MonoBehaviour
     //Wenn der Spieler auf eines der options Felder geklickt hat, werden alle Gegenstände, das Paket und der Spieler ein Feld weiter gesetzt
     private void OnMouseDown()
     {
-
-        for (int j = 1; j < 38; j++)
-        {
-            if (GameObject.Find("Kachel " + j).GetComponent<Kachel>().strudelBool)
-            {
-                GameObject.Find("Kachel " + j).GetComponent<Kachel>().PickRandomFlow();
-            }
-        }
-
-
         spielerIndex = GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index;
 
         if (GameObject.Find("Kachel " + spielerIndex).GetComponent<Kachel>().altFlowBool)
@@ -41,8 +31,19 @@ public class optionKachel : MonoBehaviour
             GameObject.Find("Kachel " + holz[i].GetComponent<GegenstandBewegung>().index).GetComponent<Kachel>().clear = true;
         }
 
-        GameObject.FindGameObjectWithTag("Spieler").transform.position = transform.position;
-        GameObject.FindGameObjectWithTag("Spieler").transform.rotation = Quaternion.Euler(0, 0, GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle);
+        if(GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool)
+        {
+            GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().ende = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow.transform.position;
+            //GameObject.FindGameObjectWithTag("Spieler").transform.position = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow.transform.position;
+            index = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow.GetComponent<Kachel>().index;
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().ende = transform.position;
+            //GameObject.FindGameObjectWithTag("Spieler").transform.position = transform.position;
+        }
+        
+        //GameObject.FindGameObjectWithTag("Spieler").transform.rotation = Quaternion.Euler(0, 0, GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle);
 
         //GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().spielerIndex = index;
         GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index = index;
@@ -55,12 +56,22 @@ public class optionKachel : MonoBehaviour
         GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().SetBelegteFelder();
 
 
+        //Strudelfeld wird auf clear gesetzt und es wird ein neues Feld als Teleport Ziel gewählt
+        for (int j = 1; j < 38; j++)
+        {
+            if (GameObject.Find("Kachel " + j).GetComponent<Kachel>().strudelBool)
+            {
+                GameObject.Find("Kachel " + j).GetComponent<Kachel>().clear = true;
+                GameObject.Find("Kachel " + j).GetComponent<Kachel>().PickRandomFlow();
+            }
+        }
 
 
 
         if (GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().GetZuege() < 1)
         {
             Debug.Log("VERLOREN!");
+            PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().level);
             SceneManager.LoadScene("Loose", LoadSceneMode.Single);
         }
         GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().ShowZuege();
@@ -70,6 +81,8 @@ public class optionKachel : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index == GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index)
         {
             Debug.Log("GEWONNEN!");
+            PlayerPrefs.SetInt("Zuganzahl", GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().GetZuege());
+            PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().level);
             SceneManager.LoadScene("Win", LoadSceneMode.Single);
         }
 

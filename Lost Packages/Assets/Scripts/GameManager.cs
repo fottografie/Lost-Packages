@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public Text zuegeLabel;
     public int zuege;
 
+    public int level;
+
 
     // Start is called before the first frame update
     void Start()
@@ -85,6 +87,15 @@ public class GameManager : MonoBehaviour
 
         int tempIndex = int.Parse(nameO[1]);
         gegenstandSpots[tempIndex] = 0;
+
+
+        for(int j = 1; j < 38; j++)
+        {
+            if(GameObject.Find("Kachel " + j).GetComponent<Kachel>().stoneBool)
+            {
+                gegenstandSpots[j] = 0;
+            }
+        }
     }
 
 
@@ -129,7 +140,14 @@ public class GameManager : MonoBehaviour
 
     public void ShowZuege()
     {
-        zuegeLabel.GetComponent<Text>().text = "Verbleibende Züge " + zuege;
+        if (zuege > 5)
+        {
+            zuegeLabel.GetComponent<Text>().text = "Verbleibende Züge: " + zuege;
+        }
+        else
+        {
+            zuegeLabel.GetComponent<Text>().text = "Verbleibende Züge: " + "<color=#ff0000ff>" +zuege +"</color>";
+        }
     }
 
 
@@ -144,6 +162,22 @@ public class GameManager : MonoBehaviour
         belegteFelder[spielerIndex] = 0;
         belegteFelder[paketIndex] = 0;
         belegteFelder[GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().next.GetComponent<Kachel>().index] = 0;
+
+        for (int j = 1; j < 38; j++)
+        {
+            if (GameObject.Find("Kachel " + j).GetComponent<Kachel>().stoneBool)
+            {
+                gegenstandSpots[j] = 0;
+            }
+        }
+
+        for (int i = 0; i < GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().options.Length; i++)
+        {
+            if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().options[i] != null)
+            {
+                belegteFelder[GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().options[i].GetComponent<Kachel>().index] = 0;
+            }
+        }
 
         GameObject[] Hoelzer = GameObject.FindGameObjectsWithTag("Holzplanke");
         for (int j = 0; j < Hoelzer.Length; j++)

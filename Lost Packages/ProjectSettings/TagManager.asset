@@ -13,6 +13,8 @@ TagManager:
   - optionKachel
   - KachelBelegt
   - belegtPaket
+  - belegtPaketPfeil
+  - strudelAnimation
   layers:
   - Default
   - TransparentFX
