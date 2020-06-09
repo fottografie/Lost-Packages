@@ -8,19 +8,6 @@ public class LevelInsel : MonoBehaviour
     public string levelLink;
     AudioSource buttonHit;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     private void OnMouseDown()
     {
         buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public int anzahlKacheln;
+    public bool tutorial;
 
     public int spielerIndex;
     public int spielerStartIndex;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     public Text zuegeLabel;
     public int zuege;
 
+    public Text levelLabel;
     public int level;
 
     AudioSource backgroundSound;
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelLabel.GetComponent<Text>().text = "Level " + level;
         GegenstandSpotsInit();
         GameInit();
         ShowZuege();
@@ -97,7 +100,7 @@ public class GameManager : MonoBehaviour
     //Initiiert das globale Array, welches die freien Felder auf dem Spielfeld enthält
     void GegenstandSpotsInit()
     {
-        gegenstandSpots = new int[38];
+        gegenstandSpots = new int[anzahlKacheln + 1];
 
         for (int i = 0; i < gegenstandSpots.Length; i++)
         {
@@ -106,9 +109,13 @@ public class GameManager : MonoBehaviour
 
         gegenstandSpots[spielerStartIndex] = 0;
 
+        if (!tutorial)
+        {
+            int rand = Random.Range(0, paketRandomStartSpots.Length);
+            paketStartIndex = paketRandomStartSpots[rand];
+            //gegenstandSpots[paketStartIndex] = 0;
+        }
 
-        int rand = Random.Range(0, paketRandomStartSpots.Length);
-        paketStartIndex = paketRandomStartSpots[rand];
         gegenstandSpots[paketStartIndex] = 0;
 
         string[] nameO = GameObject.Find("Kachel " + paketStartIndex).GetComponent<Kachel>().GetFlow((int)GameObject.Find("Kachel " + paketStartIndex).GetComponent<Kachel>().transform.rotation.eulerAngles.z).GetComponent<Kachel>().name.Split(' ');
@@ -117,7 +124,7 @@ public class GameManager : MonoBehaviour
         gegenstandSpots[tempIndex] = 0;
 
 
-        for(int j = 1; j < 38; j++)
+        for(int j = 1; j < anzahlKacheln + 1; j++)
         {
             if(GameObject.Find("Kachel " + j).GetComponent<Kachel>().stoneBool)
             {
@@ -136,7 +143,7 @@ public class GameManager : MonoBehaviour
         int j = 0;
         while (j < anzahl)
         {
-            rand = Random.Range(1, 37);
+            rand = Random.Range(1, anzahlKacheln);
 
             if (gegenstandSpots[rand] != 0)
             {
@@ -193,7 +200,7 @@ public class GameManager : MonoBehaviour
 
 
         //Steine
-        for (int j = 1; j < 38; j++)
+        for (int j = 1; j < anzahlKacheln + 1; j++)
         {
             if (GameObject.Find("Kachel " + j).GetComponent<Kachel>().stoneBool)
             {

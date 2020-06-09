@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 478773389789044884}
   - component: {fileID: 661019949405813411}
   - component: {fileID: 2173214021681764632}
+  - component: {fileID: 417750997662893702}
   m_Layer: 0
   m_Name: Kachel
   m_TagString: Kachel
@@ -118,3 +119,23 @@ MonoBehaviour:
     type: 3}
   stoneBool: 0
   stone: {fileID: 3721236038831746277, guid: c369f267c2fc44e84b73ac9e50592675, type: 3}
+  fischernetz: 0
+  rippleObject: {fileID: 8329105336774899294, guid: 5af64ed2df4da45cfb72c17661e85548,
+    type: 3}
+  ripple: {fileID: 0}
+--- !u!58 &417750997662893702
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5298586997365516872}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.5749998

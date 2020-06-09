@@ -31,6 +31,9 @@ public class Kachel : MonoBehaviour
 
     public bool fischernetz = false;
 
+    public GameObject rippleObject;
+    public GameObject ripple;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -183,13 +186,13 @@ public class Kachel : MonoBehaviour
 
     public void PickRandomFlow()
     {
-        int rand = UnityEngine.Random.Range(1, 37);
+        int rand = UnityEngine.Random.Range(1, GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().anzahlKacheln);
 
         while(GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand] == 0)
         {
             if(GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand] == 0)
             {
-                rand = UnityEngine.Random.Range(1, 37);
+                rand = UnityEngine.Random.Range(1, GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().anzahlKacheln);
 
             }
         
@@ -202,6 +205,16 @@ public class Kachel : MonoBehaviour
         GameObject parent = GameObject.Find("Kachel " + GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand]);
         flow = parent;
         //strudel = Instantiate(strudelObject, parent.transform.position, parent.transform.rotation);
-    } 
+    }
 
+
+
+
+
+    public void OnMouseDown()
+    {
+        Debug.Log("Hello");
+        DestroyImmediate(ripple, true);
+        ripple = Instantiate(rippleObject, transform.position, Quaternion.Euler(0, 0, 0));
+    }
 }

@@ -15,6 +15,9 @@ public class optionKachel : MonoBehaviour
 
     AudioSource splashSound;
 
+    public GameObject rippleObject;
+    public GameObject ripple;
+
     //Wenn der Spieler auf eines der options Felder geklickt hat, werden alle Gegenstände, das Paket und der Spieler ein Feld weiter gesetzt
     private void OnMouseDown()
     {
@@ -23,6 +26,10 @@ public class optionKachel : MonoBehaviour
             //Sound
             splashSound = GameObject.Find("SplashSound").GetComponent<AudioSource>();
             splashSound.Play(0);
+
+            DestroyImmediate(ripple, true);
+            ripple = Instantiate(rippleObject, transform.position, Quaternion.Euler(0, 0, 0));
+
 
             spielerIndex = GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index;
 
@@ -55,7 +62,7 @@ public class optionKachel : MonoBehaviour
             {
                 DestroyImmediate(strudel1, true);
                 DestroyImmediate(strudel2, true);
-                strudel1 = Instantiate(strudelAnimation, transform.position, Quaternion.Euler(0, 0, 0));
+                //strudel1 = Instantiate(strudelAnimation, transform.position, Quaternion.Euler(0, 0, 0));
                 strudel2 = Instantiate(strudelAnimation, GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow.transform.position, Quaternion.Euler(0, 0, 0));
 
 
@@ -146,7 +153,7 @@ public class optionKachel : MonoBehaviour
             }
 
             //Strudelfeld wird auf clear gesetzt und es wird ein neues Feld als Teleport Ziel gewählt
-            for (int j = 1; j < 38; j++)
+            for (int j = 1; j < GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().anzahlKacheln + 1; j++)
             {
                 if (GameObject.Find("Kachel " + j).GetComponent<Kachel>().strudelBool)
                 {

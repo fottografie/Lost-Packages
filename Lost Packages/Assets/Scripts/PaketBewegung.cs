@@ -78,7 +78,7 @@ public class PaketBewegung : MonoBehaviour
             transform.position = next.transform.position;
             DestroyImmediate(strudel1, true);
             DestroyImmediate(strudel2, true);
-            strudel1 = Instantiate(strudelAnimation, next.transform.position, Quaternion.Euler(0, 0, 0));
+            //strudel1 = Instantiate(strudelAnimation, next.transform.position, Quaternion.Euler(0, 0, 0));
             strudel2 = Instantiate(strudelAnimation, next.GetComponent<Kachel>().flow.transform.position, Quaternion.Euler(0, 0, 0));
 
             next = next.GetComponent<Kachel>().flow;

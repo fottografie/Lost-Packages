@@ -22,7 +22,7 @@ public class SpielerBewegung : MonoBehaviour
     public Vector3 ende;
     public Vector3 richtung;
 
-    public bool finishedAnimating = false;
+    public bool finishedAnimating = true;
 
 
     // Start is called before the first frame update
