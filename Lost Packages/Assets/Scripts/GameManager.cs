@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public int anzahlKacheln;
+
     public int spielerIndex;
     public int spielerStartIndex;
 
@@ -16,17 +18,24 @@ public class GameManager : MonoBehaviour
     private int[] holzStartIndex;
     public GameObject[] holz;
 
+    public int anzahlFischernetz;
+    private int[] fischernetzStartIndex;
+    public GameObject[] fischernetz;
+
     private int[] gegenstandSpots;
     public int[] belegteFelder;
 
     public GameObject spieler;
     public GameObject paket;
     public GameObject holzplanke;
+    public GameObject fischernetzObject;
 
     public Text zuegeLabel;
     public int zuege;
 
     public int level;
+
+    AudioSource backgroundSound;
 
 
     // Start is called before the first frame update
@@ -38,12 +47,16 @@ public class GameManager : MonoBehaviour
         paketIndex = paketStartIndex;
         spielerIndex = spielerStartIndex;
         belegteFelder = gegenstandSpots;
+
+        backgroundSound = GameObject.Find("Soundtrack").GetComponent<AudioSource>();
+        backgroundSound.Play(0);
     }
 
 
     //Instantiert den Spieler, das Paket und die Holzplanken auf dem Spielfeld 
     void GameInit()
     {
+        //Holz
         holz = new GameObject[anzahlHolz];
         GameObject parent;
 
@@ -56,6 +69,21 @@ public class GameManager : MonoBehaviour
             holz[i] = Instantiate(holzplanke, parent.transform.position, Quaternion.Euler(0, 0, 0));
             holz[i].GetComponent<GegenstandBewegung>().index = holzStartIndex[i];
         }
+
+
+        //Fischernetz
+        fischernetz = new GameObject[anzahlFischernetz];
+
+        fischernetzStartIndex = new int[anzahlFischernetz];
+        fischernetzStartIndex = PickSpots(anzahlFischernetz);
+
+        for (int i = 0; i < fischernetz.Length; i++)
+        {
+            parent = GameObject.Find("Kachel " + fischernetzStartIndex[i]);
+            fischernetz[i] = Instantiate(fischernetzObject, parent.transform.position, Quaternion.Euler(0, 0, 0));
+            fischernetz[i].GetComponent<GegenstandBewegung>().index = fischernetzStartIndex[i];
+        }
+
 
         parent = GameObject.Find("Kachel " + paketStartIndex);
         Instantiate(paket, parent.transform.position, Quaternion.Euler(0, 0, 0));
@@ -79,7 +107,7 @@ public class GameManager : MonoBehaviour
         gegenstandSpots[spielerStartIndex] = 0;
 
 
-        int rand = Random.Range(0, 8);
+        int rand = Random.Range(0, paketRandomStartSpots.Length);
         paketStartIndex = paketRandomStartSpots[rand];
         gegenstandSpots[paketStartIndex] = 0;
 
@@ -163,6 +191,8 @@ public class GameManager : MonoBehaviour
         belegteFelder[paketIndex] = 0;
         belegteFelder[GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().next.GetComponent<Kachel>().index] = 0;
 
+
+        //Steine
         for (int j = 1; j < 38; j++)
         {
             if (GameObject.Find("Kachel " + j).GetComponent<Kachel>().stoneBool)
@@ -171,6 +201,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+
+        //Spieler Options
         for (int i = 0; i < GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().options.Length; i++)
         {
             if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().options[i] != null)
@@ -179,6 +211,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+
+        //Holzbretter
         GameObject[] Hoelzer = GameObject.FindGameObjectsWithTag("Holzplanke");
         for (int j = 0; j < Hoelzer.Length; j++)
         {
@@ -186,6 +220,14 @@ public class GameManager : MonoBehaviour
             belegteFelder[Hoelzer[j].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index] = 0;
         }
 
+
+        //Fischernetze
+        //GameObject[] Fischernetze = GameObject.FindGameObjectsWithTag("Fischernetz");
+        //for (int j = 0; j < Fischernetze.Length; j++)
+        //{
+        //    belegteFelder[Fischernetze[j].GetComponent<GegenstandBewegung>().index] = 0;
+        //    belegteFelder[Fischernetze[j].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index] = 0;
+        //}
     }
 
 }

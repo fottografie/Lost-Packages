@@ -36,7 +36,7 @@ public class PaketBewegung : MonoBehaviour
         next = GameObject.Find("Kachel " + index);
         old = next;
         next = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
-        if (next.GetComponent<Kachel>().clear == false)
+        if (next.GetComponent<Kachel>().clear == false || GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index == next.GetComponent<Kachel>().index)
         {
             next = old;
         }

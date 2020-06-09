@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  strudelAnimation: {fileID: 8471216788786131374, guid: 5dd89253311424009bf9e69be7d6377a,
+    type: 3}
 --- !u!58 &5198397722242958860
 CircleCollider2D:
   m_ObjectHideFlags: 0

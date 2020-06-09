@@ -29,6 +29,8 @@ public class Kachel : MonoBehaviour
     public bool stoneBool;
     public GameObject stone;
 
+    public bool fischernetz = false;
+
     // Start is called before the first frame update
     void Start()
     {

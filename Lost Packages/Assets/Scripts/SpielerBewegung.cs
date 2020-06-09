@@ -22,6 +22,8 @@ public class SpielerBewegung : MonoBehaviour
     public Vector3 ende;
     public Vector3 richtung;
 
+    public bool finishedAnimating = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -114,6 +116,10 @@ public class SpielerBewegung : MonoBehaviour
             start = ZugAnimation();
             transform.position = start;
 
+        }
+        else
+        {
+            finishedAnimating = true;
         }
     }
 
