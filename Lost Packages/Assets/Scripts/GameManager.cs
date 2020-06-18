@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public GameObject fischernetzObject;
 
     public Text zuegeLabel;
+    public int maxZuege;
     public int zuege;
 
     public Text levelLabel;
@@ -40,15 +41,15 @@ public class GameManager : MonoBehaviour
     AudioSource backgroundSound;
 
 
-    // Start is called before the first frame update
+    //Initiiert alle Spielelemente
     void Start()
     {
+        zuege = maxZuege;
         levelLabel.GetComponent<Text>().text = "Level " + level;
         GegenstandSpotsInit();
         GameInit();
+        zuege = maxZuege;
         ShowZuege();
-        paketIndex = paketStartIndex;
-        spielerIndex = spielerStartIndex;
         belegteFelder = gegenstandSpots;
 
         backgroundSound = GameObject.Find("Soundtrack").GetComponent<AudioSource>();
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //Instantiert den Spieler, das Paket und die Holzplanken auf dem Spielfeld 
+    //Instantiiert den Spieler, das Paket und die Holzplanken auf dem Spielfeld 
     void GameInit()
     {
         //Holz
@@ -88,13 +89,15 @@ public class GameManager : MonoBehaviour
         }
 
 
+        //Paket Instantiierung
         parent = GameObject.Find("Kachel " + paketStartIndex);
         Instantiate(paket, parent.transform.position, Quaternion.Euler(0, 0, 0));
-        GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index = paketStartIndex;
+        paketIndex = paketStartIndex;
 
+        //Spieler Instantiierung
         parent = GameObject.Find("Kachel " + spielerStartIndex);
-        Instantiate(spieler, parent.transform.position, parent.transform.rotation);
-        GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index = paketStartIndex;
+        Instantiate(spieler, parent.transform.position, Quaternion.Euler(0, 0, 0));
+        spielerIndex = spielerStartIndex;
     }
 
     //Initiiert das globale Array, welches die freien Felder auf dem Spielfeld enthält
@@ -113,7 +116,6 @@ public class GameManager : MonoBehaviour
         {
             int rand = Random.Range(0, paketRandomStartSpots.Length);
             paketStartIndex = paketRandomStartSpots[rand];
-            //gegenstandSpots[paketStartIndex] = 0;
         }
 
         gegenstandSpots[paketStartIndex] = 0;
@@ -129,6 +131,18 @@ public class GameManager : MonoBehaviour
             if(GameObject.Find("Kachel " + j).GetComponent<Kachel>().stoneBool)
             {
                 gegenstandSpots[j] = 0;
+            }
+        }
+
+        for(int k = 1; k < anzahlKacheln + 1; k++)
+        {
+            if(GameObject.Find("Kachel " + k).GetComponent<Kachel>().strudelBool)
+            {
+                gegenstandSpots[k] = 0;
+                for (int l = 0; l < 6; l++)
+                {
+                    gegenstandSpots[GameObject.Find("Kachel " + k).GetComponent<Kachel>().neighbours[l].GetComponent<Kachel>().index] = 0;
+                }
             }
         }
     }
@@ -186,7 +200,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    //Setzt alle belegten Felder im globalen Array auf 0 (Fischernetzt sind davon ausgenommen
     public void SetBelegteFelder()
     {
         for(int i = 0; i < belegteFelder.Length; i++)
@@ -228,13 +242,18 @@ public class GameManager : MonoBehaviour
         }
 
 
-        //Fischernetze
-        //GameObject[] Fischernetze = GameObject.FindGameObjectsWithTag("Fischernetz");
-        //for (int j = 0; j < Fischernetze.Length; j++)
-        //{
-        //    belegteFelder[Fischernetze[j].GetComponent<GegenstandBewegung>().index] = 0;
-        //    belegteFelder[Fischernetze[j].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index] = 0;
-        //}
+        //Strudelfeld und alle Neighbours vom Strudelfeld
+        for (int k = 1; k < anzahlKacheln + 1; k++)
+        {
+            if (GameObject.Find("Kachel " + k).GetComponent<Kachel>().strudelBool)
+            {
+                gegenstandSpots[k] = 0;
+                for (int l = 0; l < 6; l++)
+                {
+                    gegenstandSpots[GameObject.Find("Kachel " + k).GetComponent<Kachel>().neighbours[l].GetComponent<Kachel>().index] = 0;
+                }
+            }
+        }
     }
 
 }

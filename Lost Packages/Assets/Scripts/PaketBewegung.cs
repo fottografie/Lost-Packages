@@ -9,22 +9,21 @@ public class PaketBewegung : MonoBehaviour
     private GameObject old;
 
     public GameObject belegtPaket;
-
     public GameObject belegtPaketPfeil;
-
+    public GameObject belegtPaketTemp, belegtPaketPfeilTemp;
 
     public Vector3 start;
     public Vector3 ende;
     public Vector3 richtung;
 
-
     public GameObject strudelAnimation;
-    private GameObject strudel1, strudel2;
+    private GameObject strudel;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        index = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().paketStartIndex;
         GetFlowFromIndex();
         start = transform.position;
         ende = transform.position;
@@ -43,19 +42,14 @@ public class PaketBewegung : MonoBehaviour
 
         next.GetComponent<Kachel>().clear = false;
         next.GetComponent<Kachel>().package = true;
-       
 
-        Instantiate(belegtPaket, next.transform.position, Quaternion.identity);
+        belegtPaketTemp = Instantiate(belegtPaket, next.transform.position, Quaternion.identity);
 
-        //if (next != GameObject.Find("Kachel " + index) && !GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool)
-        //{
-        //    Instantiate(belegtPaketPfeil, transform.position, GameObject.Find("Kachel " + index).transform.rotation);
-        //}
-
+        if (next != GameObject.Find("Kachel " + index) && !GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool)
+        {
+            belegtPaketPfeilTemp = Instantiate(belegtPaketPfeil, GameObject.Find("Kachel " + index).transform.position, Quaternion.Euler(0, 0, (float)GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle));
+        }
     }
-
-
-
 
     //Der Gegenstand wird auf das nächste Feld gesetzt, die alten belegten Kacheln werden entfernt und das GetFlowFromIndex wird erneut aufgerufen
     public void GetToNextField()
@@ -63,23 +57,16 @@ public class PaketBewegung : MonoBehaviour
         GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().clear = true;
         GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().package = false;
 
-
         if (GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlowBool)
         {
-            GameObject temp = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
-            GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow = GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlow;
-            GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlow = temp;
-
             GameObject.Find("Kachel " + index).GetComponent<Kachel>().ChangePfeil();
         }
 
         if(next.GetComponent<Kachel>().strudelBool)
         {
             transform.position = next.transform.position;
-            DestroyImmediate(strudel1, true);
-            DestroyImmediate(strudel2, true);
-            //strudel1 = Instantiate(strudelAnimation, next.transform.position, Quaternion.Euler(0, 0, 0));
-            strudel2 = Instantiate(strudelAnimation, next.GetComponent<Kachel>().flow.transform.position, Quaternion.Euler(0, 0, 0));
+            DestroyImmediate(strudel, true);
+            strudel = Instantiate(strudelAnimation, next.GetComponent<Kachel>().flow.transform.position, Quaternion.Euler(0, 0, 0));
 
             next = next.GetComponent<Kachel>().flow;
             transform.position = next.transform.position;
@@ -91,29 +78,25 @@ public class PaketBewegung : MonoBehaviour
             ende = next.transform.position;
         }
 
-
         index = next.GetComponent<Kachel>().index;
 
-
-        DestroyImmediate(GameObject.FindGameObjectWithTag("belegtPaket"), true);
-        DestroyImmediate(GameObject.FindGameObjectWithTag("belegtPaketPfeil"), true);
+        DestroyImmediate(belegtPaketTemp, true);
+        DestroyImmediate(belegtPaketPfeilTemp, true);
 
         GetFlowFromIndex();
     }
 
-
-
+    //Für Paket Animation 
     private void FixedUpdate()
     {
         if(start != ende)
         {
             start = ZugAnimation();
             transform.position = start;
-            
         }
     }
 
-
+    //Paket Animation
     Vector3 ZugAnimation()
     {
         richtung = ende - start;
@@ -122,9 +105,6 @@ public class PaketBewegung : MonoBehaviour
         Vector3 newStart;
         newStart = start + richtung;
 
-        return newStart;
-        
+        return newStart;   
     }
-
-
 }

@@ -20,9 +20,8 @@ public class GegenstandBewegung : MonoBehaviour
     public Vector3 ende;
     public Vector3 richtung;
 
-
     public GameObject strudelAnimation;
-    private GameObject strudel1, strudel2;
+    private GameObject strudel;
 
 
     // Start is called before the first frame update
@@ -33,13 +32,13 @@ public class GegenstandBewegung : MonoBehaviour
         ende = transform.position;
     }
 
-    //Setzt next auf das Feld in Flussrichtung, wenn es nich von einem Gegenstand belegt ist und instantiiert darauf ein belegt-Feld
+    //Setzt next auf das Feld in Flussrichtung, wenn es nicht von einem Gegenstand belegt ist und instantiiert darauf ein belegt-Feld
     void GetFlowFromIndex()
     {
         next = GameObject.Find("Kachel " + index);
         old = next;
         next = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
-        if (next.GetComponent<Kachel>().clear == false)
+        if (!next.GetComponent<Kachel>().clear)
         {
             next = old;
         }
@@ -53,16 +52,18 @@ public class GegenstandBewegung : MonoBehaviour
             next.GetComponent<Kachel>().fischernetz = true;
         }
 
-        //belegtHolz = Instantiate(belegtHolzObject, next.transform.position, Quaternion.Euler(0, 0, 0));
         if (next != GameObject.Find("Kachel " + index) && !GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool && GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index != index)
         {
             belegtHolzPfeil = Instantiate(belegtHolzPfeilObject, GameObject.Find("Kachel " + index).transform.position, GameObject.Find("Kachel " + index).transform.rotation);
+            //belegtHolz = Instantiate(belegtHolzObject, next.transform.position, Quaternion.Euler(0, 0, 0));
         }
-
-
+        else if(next == GameObject.Find("Kachel " + index))
+        {
+            belegtHolz = Instantiate(belegtHolzObject, next.transform.position, Quaternion.Euler(0, 0, 0));
+        }
     }
 
-    //Der Gegenstand wird auf das nächste Feld gesetzt, die alten belegten Kacheln werden entfernt und das GetFlowFromIndex wird erneut aufgerufen
+    //Der Gegenstand wird auf das nächste Feld gesetzt, die alten belegten Kacheln werden entfernt und GetFlowFromIndex wird erneut aufgerufen
     public void GetToNextField()
     {
         GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().clear = true;
@@ -70,10 +71,6 @@ public class GegenstandBewegung : MonoBehaviour
         //Alt Flow
         if (GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlowBool)
         {
-            GameObject temp = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
-            GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow = GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlow;
-            GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlow = temp;
-
             GameObject.Find("Kachel " + index).GetComponent<Kachel>().ChangePfeil();
         }
 
@@ -81,20 +78,14 @@ public class GegenstandBewegung : MonoBehaviour
         if (next.GetComponent<Kachel>().strudelBool)
         {
             transform.position = next.transform.position;
-            DestroyImmediate(strudel1, true);
-            DestroyImmediate(strudel2, true);
-            //strudel1 = Instantiate(strudelAnimation, next.transform.position, Quaternion.Euler(0, 0, 0));
-            strudel2 = Instantiate(strudelAnimation, next.GetComponent<Kachel>().flow.transform.position, Quaternion.Euler(0, 0, 0));
+            DestroyImmediate(strudel, true);
+            strudel = Instantiate(strudelAnimation, next.GetComponent<Kachel>().flow.transform.position, Quaternion.Euler(0, 0, 0));
 
             next = next.GetComponent<Kachel>().flow;
             transform.position = next.transform.position;
             ende = transform.position;
             start = transform.position;
         }
-        //else if (next.GetComponent<Kachel>().fischernetz && !fischernetzBool)
-        //{
-        //    next = GameObject.Find("Kachel " + index);
-        //}
         else
         {
             ende = next.transform.position;
@@ -102,17 +93,13 @@ public class GegenstandBewegung : MonoBehaviour
 
         index = next.GetComponent<Kachel>().index;
 
-
         DestroyImmediate(belegtHolz, true);
         DestroyImmediate(belegtHolzPfeil, true);
 
         GetFlowFromIndex();
     }
 
-
-
-
-
+    //Für Gegenstands Animation 
     private void FixedUpdate()
     {
         if (start != ende)
@@ -123,7 +110,7 @@ public class GegenstandBewegung : MonoBehaviour
         }
     }
 
-
+    //Gegenstands Animation
     Vector3 ZugAnimation()
     {
         richtung = ende - start;

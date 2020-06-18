@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4208951716661652844}
   - component: {fileID: 4208951716661652845}
   - component: {fileID: 963022316176829003}
-  - component: {fileID: 1870505238}
+  - component: {fileID: 1640828505}
   m_Layer: 0
   m_Name: Menue
   m_TagString: Untagged
@@ -109,7 +109,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.18, y: 2.09}
   m_EdgeRadius: 0
---- !u!114 &1870505238
+--- !u!114 &1640828505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +118,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4208951716661652846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dfba9af804dc43b0a68bad642a3db7d, type: 3}
+  m_Script: {fileID: 11500000, guid: 467299ff407ff494f8701b97a8fb678b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLink: Levelauswahl
+  levelName: Menue
+  wiederholen: 0

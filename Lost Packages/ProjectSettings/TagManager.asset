@@ -16,6 +16,7 @@ TagManager:
   - belegtPaketPfeil
   - strudelAnimation
   - Fischernetz
+  - GameManager
   layers:
   - Default
   - TransparentFX

@@ -34,7 +34,7 @@ public class Kachel : MonoBehaviour
     public GameObject rippleObject;
     public GameObject ripple;
 
-    // Start is called before the first frame update
+    //Setzt den Index der Kachel, instantiiert ggf. einen Stein, einen Pfeil, einen altPfeil oder einen Strudel
     void Start()
     {
         SetIndex();
@@ -45,8 +45,6 @@ public class Kachel : MonoBehaviour
         }
         else
         {
-
-
             flowAngle = (int)transform.rotation.eulerAngles.z;
             if (!strudelBool)
             {
@@ -66,6 +64,7 @@ public class Kachel : MonoBehaviour
         }
     }
 
+    //Ändert bei einem Alternativen Pfeil die Richtung des Flows und passt die Anzeige entsprechend an
     public void ChangePfeil()
     {
         DestroyImmediate(pfeil, true);
@@ -74,6 +73,9 @@ public class Kachel : MonoBehaviour
         int temp = flowAngle;
         flowAngle = altFlowAngle;
         altFlowAngle = temp;
+
+        flow = GetFlow(flowAngle);
+        altFlow = GetFlow(altFlowAngle);
 
         pfeil = Instantiate(pfeilObject, transform.position, Quaternion.Euler(0, 0, flowAngle));
         altPfeil = Instantiate(altPfeilObject, transform.position, Quaternion.Euler(0, 0, altFlowAngle));
@@ -127,7 +129,6 @@ public class Kachel : MonoBehaviour
         {
             int rand = UnityEngine.Random.Range(1, 37);
             flow_ = GameObject.Find("Kachel " + rand);
-            //strudel = Instantiate(strudelObject, GameObject.Find("Kachel " + rand).transform.position, GameObject.Find("Kachel " + rand).transform.rotation);
 
             return flow_;
         }
@@ -138,7 +139,7 @@ public class Kachel : MonoBehaviour
     //Berechnet anhandt der Drehnung der Kachel die Optionsfelder des Spielers
     public GameObject[] PlayerNextField()
     {
-        GameObject[] playerNextField = new GameObject[4];
+        GameObject[] playerNextField = new GameObject[3];
         if (flowAngle == 0)
         {
             playerNextField[0] = neighbours[5];
@@ -175,46 +176,31 @@ public class Kachel : MonoBehaviour
             playerNextField[1] = neighbours[5];
             playerNextField[2] = neighbours[3];
         }
-        if (strudelBool)
-        {
-            playerNextField[3] = flow;
-        }
 
         return playerNextField;
     }
 
-
+    //Wält ein zufälliges nächstes Feld (für den Strudel)
     public void PickRandomFlow()
     {
-        int rand = UnityEngine.Random.Range(1, GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().anzahlKacheln);
+        int rand = UnityEngine.Random.Range(1, GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().anzahlKacheln);
 
-        while(GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand] == 0)
+        while(GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().belegteFelder[rand] == 0)
         {
-            if(GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand] == 0)
+            if(GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().belegteFelder[rand] == 0)
             {
-                rand = UnityEngine.Random.Range(1, GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().anzahlKacheln);
-
+                rand = UnityEngine.Random.Range(1, GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().anzahlKacheln);
             }
-        
-            
         }
-        //flow = GameObject.Find("Kachel " + GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand]);
 
-        DestroyImmediate(strudel, true);
-
-        GameObject parent = GameObject.Find("Kachel " + GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().belegteFelder[rand]);
+        GameObject parent = GameObject.Find("Kachel " + GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().belegteFelder[rand]);
         flow = parent;
-        //strudel = Instantiate(strudelObject, parent.transform.position, parent.transform.rotation);
     }
 
-
-
-
-
+    //Wellenanimation auf den Kacheln
     public void OnMouseDown()
     {
-        Debug.Log("Hello");
-        DestroyImmediate(ripple, true);
-        ripple = Instantiate(rippleObject, transform.position, Quaternion.Euler(0, 0, 0));
+            DestroyImmediate(ripple, true);
+            ripple = Instantiate(rippleObject, transform.position, Quaternion.Euler(0, 0, 0));
     }
 }

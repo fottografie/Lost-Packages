@@ -105,7 +105,7 @@ MonoBehaviour:
   index: 0
   strudelAnimation: {fileID: 8471216788786131374, guid: 5dd89253311424009bf9e69be7d6377a,
     type: 3}
-  rippleObject: {fileID: 8329105336774899294, guid: 5af64ed2df4da45cfb72c17661e85548,
+  rippleAnimation: {fileID: 8329105336774899294, guid: 5af64ed2df4da45cfb72c17661e85548,
     type: 3}
   ripple: {fileID: 0}
 --- !u!58 &5198397722242958860
