@@ -9,10 +9,10 @@ public class GegenstandBewegung : MonoBehaviour
     private GameObject old;
 
     public GameObject belegtHolzObject;
-    private GameObject belegtHolz;
+    public GameObject belegtHolz;
 
     public GameObject belegtHolzPfeilObject;
-    private GameObject belegtHolzPfeil;
+    public GameObject belegtHolzPfeil;
 
     public bool fischernetzBool;
 
@@ -22,6 +22,8 @@ public class GegenstandBewegung : MonoBehaviour
 
     public GameObject strudelAnimation;
     private GameObject strudel;
+
+    public bool coin;
 
 
     // Start is called before the first frame update
@@ -52,6 +54,10 @@ public class GegenstandBewegung : MonoBehaviour
             next.GetComponent<Kachel>().fischernetz = true;
         }
 
+        if (coin) { 
+            next.GetComponent<Kachel>().package = true;
+        }
+
         if (next != GameObject.Find("Kachel " + index) && !GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool && GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index != index)
         {
             belegtHolzPfeil = Instantiate(belegtHolzPfeilObject, GameObject.Find("Kachel " + index).transform.position, GameObject.Find("Kachel " + index).transform.rotation);
@@ -67,6 +73,10 @@ public class GegenstandBewegung : MonoBehaviour
     public void GetToNextField()
     {
         GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().clear = true;
+        if (coin)
+        {
+            GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().package = false;
+        }
 
         //Alt Flow
         if (GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlowBool)

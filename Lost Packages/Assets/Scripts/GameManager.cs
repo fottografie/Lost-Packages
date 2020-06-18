@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     private int[] fischernetzStartIndex;
     public GameObject[] fischernetz;
 
+    public int anzahlCoins;
+    private int[] coinsStartIndex;
+    public GameObject[] coins;
+
     private int[] gegenstandSpots;
     public int[] belegteFelder;
 
@@ -30,6 +34,9 @@ public class GameManager : MonoBehaviour
     public GameObject paket;
     public GameObject holzplanke;
     public GameObject fischernetzObject;
+    public GameObject coinsObject;
+
+    GameObject parent;
 
     public Text zuegeLabel;
     public int maxZuege;
@@ -37,6 +44,10 @@ public class GameManager : MonoBehaviour
 
     public Text levelLabel;
     public int level;
+
+    public Text coinsLabel;
+
+    public bool dialogueActive = false;
 
     AudioSource backgroundSound;
 
@@ -54,7 +65,22 @@ public class GameManager : MonoBehaviour
 
         backgroundSound = GameObject.Find("Soundtrack").GetComponent<AudioSource>();
         backgroundSound.Play(0);
+
+        ShowCoins();
+
+        if (tutorial)
+        {
+            dialogueActive = true;
+            StartCoroutine(OpenDialogue());
+        }
     }
+
+    IEnumerator OpenDialogue()
+    {
+        yield return new WaitForSeconds(1.5f);
+        GameObject.Find("DialogTrigger").GetComponent<DialogueTrigger>().TriggerDialogue();
+    }
+
 
 
     //Instantiiert den Spieler, das Paket und die Holzplanken auf dem Spielfeld 
@@ -62,8 +88,7 @@ public class GameManager : MonoBehaviour
     {
         //Holz
         holz = new GameObject[anzahlHolz];
-        GameObject parent;
-
+        
         holzStartIndex = new int[anzahlHolz];
         holzStartIndex = PickSpots(anzahlHolz);
 
@@ -86,6 +111,20 @@ public class GameManager : MonoBehaviour
             parent = GameObject.Find("Kachel " + fischernetzStartIndex[i]);
             fischernetz[i] = Instantiate(fischernetzObject, parent.transform.position, Quaternion.Euler(0, 0, 0));
             fischernetz[i].GetComponent<GegenstandBewegung>().index = fischernetzStartIndex[i];
+        }
+
+
+        //Coins
+        coins = new GameObject[anzahlCoins];
+
+        coinsStartIndex = new int[anzahlCoins];
+        coinsStartIndex = PickSpots(anzahlCoins);
+
+        for(int i = 0; i < anzahlCoins; i++)
+        {
+            parent = GameObject.Find("Kachel " + coinsStartIndex[i]);
+            coins[i] = Instantiate(coinsObject, parent.transform.position, Quaternion.Euler(0, 0, 0));
+            coins[i].GetComponent<GegenstandBewegung>().index = coinsStartIndex[i];
         }
 
 
@@ -197,6 +236,12 @@ public class GameManager : MonoBehaviour
         {
             zuegeLabel.GetComponent<Text>().text = "Verbleibende Züge: " + "<color=#ff0000ff>" +zuege +"</color>";
         }
+    }
+
+    //Coins Anzeige
+    public void ShowCoins()
+    {
+        coinsLabel.GetComponent<Text>().text = "" + PlayerPrefs.GetInt("Coins");
     }
 
 

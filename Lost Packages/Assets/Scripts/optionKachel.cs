@@ -10,6 +10,8 @@ public class OptionKachel : MonoBehaviour
     private int spielerIndex;
 
     GameObject[] holz;
+    GameObject[] fischernetz;
+    GameObject[] coins;
 
     public GameObject strudelAnimation;
     private GameObject strudelAnimationTemp;
@@ -22,7 +24,7 @@ public class OptionKachel : MonoBehaviour
     //Wenn der Spieler auf eines der options Felder geklickt hat, werden alle Gegenstände, das Paket und der Spieler ein Feld weiter gesetzt
     private void OnMouseDown()
     {
-        if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().finishedAnimating)
+        if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().finishedAnimating && !GameObject.Find("GameManager").GetComponent<GameManager>().dialogueActive)
         {
             //Sound
             splashSound = GameObject.Find("SplashSound").GetComponent<AudioSource>();
@@ -65,7 +67,7 @@ public class OptionKachel : MonoBehaviour
                 NextStep();
 
                 //Fischernetz
-                GameObject[] fischernetz = GameObject.FindGameObjectsWithTag("Fischernetz");
+                fischernetz = GameObject.FindGameObjectsWithTag("Fischernetz");
                 if (fischernetz != null)
                 {
                     for (int i = 0; i < fischernetz.Length; i++)
@@ -108,6 +110,20 @@ public class OptionKachel : MonoBehaviour
                 }
             }
 
+            //Überprüfung ob der Spieler auf einem Coin Feld ist
+            coins = GameObject.FindGameObjectsWithTag("Coin");
+            for (int i = 0; i < coins.Length; i++)
+            {
+                if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index == coins[i].GetComponent<GegenstandBewegung>().index)
+                {
+                    PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 1);
+                    GameObject.Find("GameManager").GetComponent<GameManager>().ShowCoins();
+                    DestroyImmediate(coins[i].GetComponent<GegenstandBewegung>().belegtHolz, true);
+                    DestroyImmediate(coins[i].GetComponent<GegenstandBewegung>().belegtHolzPfeil, true);
+                    DestroyImmediate(coins[i], true);
+                }
+            }
+
             //Überprüfung ob der Spieler verloren hat (ob er keine Züge mehr übrig hat)
             if (GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetZuege() < 1)
             {
@@ -138,6 +154,16 @@ public class OptionKachel : MonoBehaviour
             {
                 holz[i].GetComponent<GegenstandBewegung>().GetToNextField();
                 GameObject.Find("Kachel " + holz[i].GetComponent<GegenstandBewegung>().index).GetComponent<Kachel>().clear = true;
+            }
+        }
+
+        coins = GameObject.FindGameObjectsWithTag("Coin");
+        if(coins != null)
+        {
+            for(int i = 0; i < coins.Length; i++)
+            {
+                coins[i].GetComponent<GegenstandBewegung>().GetToNextField();
+                GameObject.Find("Kachel " + coins[i].GetComponent<GegenstandBewegung>().index).GetComponent<Kachel>().clear = true;
             }
         }
 

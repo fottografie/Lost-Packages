@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
 
     public Animator animator;
 
-    private Queue<string> sentences; 
+    private Queue<string> sentences;
 
 
     void Start()
@@ -64,6 +64,10 @@ public class DialogueManager : MonoBehaviour
     //Beendet den Dialog und bledet das Dialogfenster aus
     void EndDialogue()
     {
+        if (GameObject.Find("GameManager") != null)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().dialogueActive = false;
+        }
         animator.SetBool("IsOpen", false);
     }
 }

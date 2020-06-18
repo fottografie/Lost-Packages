@@ -17,6 +17,8 @@ TagManager:
   - strudelAnimation
   - Fischernetz
   - GameManager
+  - DialogueManager
+  - Coin
   layers:
   - Default
   - TransparentFX

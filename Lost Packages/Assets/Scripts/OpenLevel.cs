@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //Öffnet eine neue Scene
 public class OpenLevel : MonoBehaviour
@@ -9,37 +10,48 @@ public class OpenLevel : MonoBehaviour
     public string levelName;
     public bool wiederholen;
 
+    public int minCoins;
+    public Text minCoinLabel;
+
     AudioSource buttonHit;
 
     private void Start()
     {
+        minCoinLabel.GetComponent<Text>().text = "" + minCoins;
         //PlayerPrefs.SetInt("Menue", 0);
     }
 
     //Für Objekte mit Collider
     private void OnMouseDown()
     {
-        buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
-        buttonHit.Play(0);
-
         if (levelName == "next" || wiederholen)
         {
             int nextLevel = PlayerPrefs.GetInt("NextScene");
             if (wiederholen)
             {
+                buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
+                buttonHit.Play(0);
                 GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + (nextLevel));
-                //SceneManager.LoadScene("Level0" + (nextLevel), LoadSceneMode.Single);
             }
             else
             {
+                buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
+                buttonHit.Play(0);
                 GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + (nextLevel + 1));
-                //SceneManager.LoadScene("Level0" + (nextLevel + 1), LoadSceneMode.Single);
             }
         }
         else
         {
-            GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
-            //SceneManager.LoadScene(levelName, LoadSceneMode.Single);
+            if (PlayerPrefs.GetInt("Coins") >= minCoins)
+            {
+                buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
+                buttonHit.Play(0);
+                GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
+            }
+            else
+            {
+                GameObject.Find("DialogTrigger").GetComponent<DialogueTrigger>().TriggerDialogue();
+            }
         }
         
     }
@@ -77,12 +89,10 @@ public class OpenLevel : MonoBehaviour
         {
             int nextLevel = PlayerPrefs.GetInt("NextScene");
             GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + (nextLevel + 1));
-            //SceneManager.LoadScene("Level0" + (nextLevel + 1), LoadSceneMode.Single);
         }
         else
         {
             GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
-            //SceneManager.LoadScene(levelName, LoadSceneMode.Single);
         }
     }
 }
