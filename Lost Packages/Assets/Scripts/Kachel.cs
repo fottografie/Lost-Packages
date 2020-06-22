@@ -33,6 +33,8 @@ public class Kachel : MonoBehaviour
 
     public GameObject rippleObject;
     public GameObject ripple;
+    public GameObject particlesObject;
+    public GameObject particles;
 
     //Setzt den Index der Kachel, instantiiert ggf. einen Stein, einen Pfeil, einen altPfeil oder einen Strudel
     void Start()
@@ -200,7 +202,9 @@ public class Kachel : MonoBehaviour
     //Wellenanimation auf den Kacheln
     public void OnMouseDown()
     {
-            DestroyImmediate(ripple, true);
-            ripple = Instantiate(rippleObject, transform.position, Quaternion.Euler(0, 0, 0));
+        DestroyImmediate(ripple, true);
+        ripple = Instantiate(rippleObject, transform.position, Quaternion.Euler(0, 0, 0));
+        //DestroyImmediate(particles, true);
+        //particles = Instantiate(particlesObject, transform.position, Quaternion.Euler(0, 0, 0));
     }
 }

@@ -123,6 +123,9 @@ MonoBehaviour:
   rippleObject: {fileID: 8329105336774899294, guid: 5af64ed2df4da45cfb72c17661e85548,
     type: 3}
   ripple: {fileID: 0}
+  particlesObject: {fileID: 7560434591588614333, guid: aa251b01d3cc94ca5a86502cd5c0eee0,
+    type: 3}
+  particles: {fileID: 0}
 --- !u!58 &417750997662893702
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -73,6 +73,9 @@ public class GameManager : MonoBehaviour
             dialogueActive = true;
             StartCoroutine(OpenDialogue());
         }
+
+        PlayerPrefs.SetInt("aktuellesLevel", level);
+        PlayerPrefs.SetInt("Menue", 0);
     }
 
     IEnumerator OpenDialogue()
@@ -80,8 +83,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         GameObject.Find("DialogTrigger").GetComponent<DialogueTrigger>().TriggerDialogue();
     }
-
-
 
     //Instantiiert den Spieler, das Paket und die Holzplanken auf dem Spielfeld 
     void GameInit()
@@ -284,6 +285,15 @@ public class GameManager : MonoBehaviour
         {
             belegteFelder[Hoelzer[j].GetComponent<GegenstandBewegung>().index] = 0;
             belegteFelder[Hoelzer[j].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index] = 0;
+        }
+
+
+        //Coins
+        GameObject[] Coins = GameObject.FindGameObjectsWithTag("Coin");
+        for (int j = 0; j < Coins.Length; j++)
+        {
+            belegteFelder[Coins[j].GetComponent<GegenstandBewegung>().index] = 0;
+            belegteFelder[Coins[j].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index] = 0;
         }
 
 

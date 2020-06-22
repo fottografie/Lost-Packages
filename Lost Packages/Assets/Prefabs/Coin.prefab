@@ -96,10 +96,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   next: {fileID: 0}
-  belegtHolzObject: {fileID: 6946023892275767005, guid: 7044965d8ae0e4895b31049e4ce421ba,
+  belegtHolzObject: {fileID: 876181058327076165, guid: 7d9975f052c7a41698bd06654991adfb,
     type: 3}
-  belegtHolzPfeilObject: {fileID: 2716038601568895929, guid: 6d5e99c900f1a4a5ea4e88dcad2c283b,
+  belegtHolz: {fileID: 0}
+  belegtHolzPfeilObject: {fileID: 7135651980609093107, guid: fba1ddc3c8300477a9caeb4c7e2045af,
     type: 3}
+  belegtHolzPfeil: {fileID: 0}
   fischernetzBool: 0
   start: {x: 0, y: 0, z: 0}
   ende: {x: 0, y: 0, z: 0}

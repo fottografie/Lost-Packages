@@ -17,7 +17,10 @@ public class OpenLevel : MonoBehaviour
 
     private void Start()
     {
-        minCoinLabel.GetComponent<Text>().text = "" + minCoins;
+        if (minCoinLabel != null) { 
+            minCoinLabel.GetComponent<Text>().text = "" + minCoins;
+        }
+
         //PlayerPrefs.SetInt("Menue", 0);
     }
 
@@ -31,13 +34,21 @@ public class OpenLevel : MonoBehaviour
             {
                 buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
                 buttonHit.Play(0);
-                GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + (nextLevel));
+                Debug.Log(PlayerPrefs.GetInt("aktuellesLevel"));
+                GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + PlayerPrefs.GetInt("aktuellesLevel"));
             }
             else
             {
                 buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
                 buttonHit.Play(0);
-                GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + (nextLevel + 1));
+                if(nextLevel + 1 >= 6)
+                {
+                    GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Start");
+                }
+                else
+                {
+                    GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + (nextLevel + 1));
+                }
             }
         }
         else
@@ -53,7 +64,6 @@ public class OpenLevel : MonoBehaviour
                 GameObject.Find("DialogTrigger").GetComponent<DialogueTrigger>().TriggerDialogue();
             }
         }
-        
     }
 
     //Für Buttons
@@ -88,7 +98,7 @@ public class OpenLevel : MonoBehaviour
         if (wiederholen)
         {
             int nextLevel = PlayerPrefs.GetInt("NextScene");
-            GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + (nextLevel + 1));
+            GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + PlayerPrefs.GetInt("aktuellesLevel"));
         }
         else
         {
