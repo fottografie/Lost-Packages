@@ -16,19 +16,21 @@ public class OptionKachel : MonoBehaviour
     public GameObject strudelAnimation;
     private GameObject strudelAnimationTemp;
 
-    AudioSource splashSound;
-
     public GameObject rippleAnimation;
     public GameObject ripple;
+
+    public GameObject WaterSplashObject;
+    private GameObject WaterSplash;
 
     //Wenn der Spieler auf eines der options Felder geklickt hat, werden alle Gegenstände, das Paket und der Spieler ein Feld weiter gesetzt
     private void OnMouseDown()
     {
         if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().finishedAnimating && !GameObject.Find("GameManager").GetComponent<GameManager>().dialogueActive)
         {
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().PlayerStuck();
+
             //Sound
-            splashSound = GameObject.Find("SplashSound").GetComponent<AudioSource>();
-            splashSound.Play(0);
+            FindObjectOfType<AudioManager>().PlayRandomOfKind("WaterSound", 8);
 
             DestroyImmediate(ripple, true);
             ripple = Instantiate(rippleAnimation, transform.position, Quaternion.Euler(0, 0, 0));
@@ -118,9 +120,7 @@ public class OptionKachel : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 1);
                     GameObject.Find("GameManager").GetComponent<GameManager>().ShowCoins();
-                    DestroyImmediate(coins[i].GetComponent<GegenstandBewegung>().belegtHolz, true);
-                    DestroyImmediate(coins[i].GetComponent<GegenstandBewegung>().belegtHolzPfeil, true);
-                    DestroyImmediate(coins[i], true);
+                    coins[i].GetComponent<GegenstandBewegung>().CoinExplosion();
                 }
             }
 
@@ -128,22 +128,49 @@ public class OptionKachel : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetZuege() < 1)
             {
                 PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().level);
-                GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Loose");
+                //GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Loose");
+                SceneManager.LoadScene("Loose", LoadSceneMode.Additive);
             }
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ShowZuege();
+
+            //Überprüfung ob der Spieler gewonnen hat (ob er auf dem gleichen Feld wie das Paket steht)
+            if (index == GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index)
+            {
+                PlayerPrefs.SetInt("Zuganzahl", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetZuege());
+                PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().level);
+                PlayerPrefs.SetInt("maxZuege", GameObject.Find("GameManager").GetComponent<GameManager>().maxZuege);
+                //GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Win");
+
+                SceneManager.LoadScene("Win", LoadSceneMode.Additive);
+            }
+
+
+            if (!GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().finishedAnimating && WaterSplash == null)
+            {
+                WaterSplash = Instantiate(WaterSplashObject, GameObject.FindGameObjectWithTag("Spieler").transform.position, Quaternion.Euler(0, 0, 0));
+            }
+
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().DestroyObjects("WaterSplashes");
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().DestroyObjects("ripple");
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().DestroyObjects("CoinExplosion");
+            //StartCoroutine(DelayDestroy("WaterSplashes"));
+            //StartCoroutine(DelayDestroy("ripple"));
+            //StartCoroutine(DelayDestroy("CoinExplosion"));
+
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().CheckGegenstaende();
+            
         }
     }
 
     private void Update()
     {
-        //Überprüfung ob der Spieler gewonnen hat (ob er auf dem gleichen Feld wie das Paket steht)
-        if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index == GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index && GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().finishedAnimating)
+
+
+        if (!GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().finishedAnimating && WaterSplash != null)
         {
-            PlayerPrefs.SetInt("Zuganzahl", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetZuege());
-            PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().level);
-            PlayerPrefs.SetInt("maxZuege", GameObject.Find("GameManager").GetComponent<GameManager>().maxZuege);
-            GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Win");
+            WaterSplash.transform.position = GameObject.FindGameObjectWithTag("Spieler").transform.position;
         }
+        
     }
 
 

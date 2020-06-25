@@ -13,8 +13,7 @@ public class LevelLoader : MonoBehaviour
 
     public void TransitionToNextLevel(string scene)
     {
-        wind = GameObject.Find("WindSound").GetComponent<AudioSource>();
-        wind.Play(0);
+        FindObjectOfType<AudioManager>().Play("Wind");
         StartCoroutine(LoadLevel(scene));
     }
 

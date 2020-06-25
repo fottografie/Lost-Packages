@@ -10,7 +10,6 @@ public class PlaySoundOnStart : MonoBehaviour
 
     void Start()
     {
-        sound = GameObject.Find(source).GetComponent<AudioSource>();
-        sound.Play(0);
+
     }
 }

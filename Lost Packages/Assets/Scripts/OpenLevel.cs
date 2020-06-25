@@ -13,15 +13,11 @@ public class OpenLevel : MonoBehaviour
     public int minCoins;
     public Text minCoinLabel;
 
-    AudioSource buttonHit;
-
     private void Start()
     {
         if (minCoinLabel != null) { 
             minCoinLabel.GetComponent<Text>().text = "" + minCoins;
         }
-
-        //PlayerPrefs.SetInt("Menue", 0);
     }
 
     //Für Objekte mit Collider
@@ -32,15 +28,13 @@ public class OpenLevel : MonoBehaviour
             int nextLevel = PlayerPrefs.GetInt("NextScene");
             if (wiederholen)
             {
-                buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
-                buttonHit.Play(0);
+                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
                 Debug.Log(PlayerPrefs.GetInt("aktuellesLevel"));
                 GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + PlayerPrefs.GetInt("aktuellesLevel"));
             }
             else
             {
-                buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
-                buttonHit.Play(0);
+                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
                 if(nextLevel + 1 >= 6)
                 {
                     GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Start");
@@ -55,8 +49,7 @@ public class OpenLevel : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("Coins") >= minCoins)
             {
-                buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
-                buttonHit.Play(0);
+                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
                 GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
             }
             else
@@ -69,8 +62,7 @@ public class OpenLevel : MonoBehaviour
     //Für Buttons
     public void LoadMenu()
     {
-        buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
-        buttonHit.Play(0);
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
         if (PlayerPrefs.GetInt("Menue") == 1)
         {
             PlayerPrefs.SetInt("Menue", 0);
@@ -85,24 +77,43 @@ public class OpenLevel : MonoBehaviour
 
     public void UnloadMenue()
     {
-        buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
-        buttonHit.Play(0);
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
         SceneManager.UnloadSceneAsync("Menue");
         PlayerPrefs.SetInt("Menue", 0);
     }
 
     public void LoadLevel()
     {
-        buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
-        buttonHit.Play(0);
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
         if (wiederholen)
         {
-            int nextLevel = PlayerPrefs.GetInt("NextScene");
             GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + PlayerPrefs.GetInt("aktuellesLevel"));
+        }
+        else if(levelName == "next")
+        {
+            int nextLevel = PlayerPrefs.GetInt("NextScene");
+            if (nextLevel == 5)
+            {
+                GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Ende");
+            }
+            else
+            {
+                GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + (nextLevel + 1));
+            }
         }
         else
         {
-            GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
+            if (PlayerPrefs.GetInt("Coins") >= minCoins)
+            {
+                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
+                GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
+            }
+            else
+            {
+                GameObject.Find("DialogTrigger").GetComponent<DialogueTrigger>().TriggerDialogue();
+            }
         }
+
+
     }
 }

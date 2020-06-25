@@ -98,6 +98,8 @@ MonoBehaviour:
   index: 0
   clear: 0
   package: 0
+  kachelObject: {fileID: 2500308281465189431, guid: b12045c095693466bafa1b8357f425df,
+    type: 3}
   pfeilObject: {fileID: 2372962407681523304, guid: 6e82a54ab7b86400e98f9f12ad13272a,
     type: 3}
   neighbours:

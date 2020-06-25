@@ -101,6 +101,8 @@ MonoBehaviour:
     type: 3}
   belegtPaketPfeil: {fileID: 3235315714427536503, guid: 4d6aaa8d764314824bac82d2629ef1f5,
     type: 3}
+  belegtPaketTemp: {fileID: 0}
+  belegtPaketPfeilTemp: {fileID: 0}
   start: {x: 0, y: 0, z: 0}
   ende: {x: 0, y: 0, z: 0}
   richtung: {x: 0, y: 0, z: 0}

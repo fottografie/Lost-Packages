@@ -19,6 +19,9 @@ TagManager:
   - GameManager
   - DialogueManager
   - Coin
+  - WaterSplashes
+  - CoinExplosion
+  - ripple
   layers:
   - Default
   - TransparentFX

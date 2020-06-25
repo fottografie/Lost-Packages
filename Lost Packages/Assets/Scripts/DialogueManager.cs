@@ -56,6 +56,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
+            FindObjectOfType<AudioManager>().PlayRandomOfKind("KeyboardSound", 9);
             dialogueText.text += letter;
             yield return null;
         }

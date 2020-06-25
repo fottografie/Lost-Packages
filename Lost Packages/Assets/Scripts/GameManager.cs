@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour
 
     public bool dialogueActive = false;
 
-    AudioSource backgroundSound;
-
 
     //Initiiert alle Spielelemente
     void Start()
@@ -63,8 +61,8 @@ public class GameManager : MonoBehaviour
         ShowZuege();
         belegteFelder = gegenstandSpots;
 
-        backgroundSound = GameObject.Find("Soundtrack").GetComponent<AudioSource>();
-        backgroundSound.Play(0);
+        FindObjectOfType<AudioManager>().Play("BackgroundWaves");
+        //FindObjectOfType<AudioManager>().Play("Theme");
 
         ShowCoins();
 
@@ -311,4 +309,78 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayerStuck()
+    {
+        StartCoroutine(PlayerStuckCheck());
+    }
+
+    IEnumerator PlayerStuckCheck()
+    {
+        yield return new WaitForSeconds(2f);
+        if(GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().options == null)
+        {
+            GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Loose");
+        }
+    }
+
+   public void DestroyObjects(string name)
+    {
+        StartCoroutine(DelayDestroy(name));
+    }
+
+
+    IEnumerator DelayDestroy(string name)
+    {
+        yield return new WaitForSeconds(1f);
+        GameObject[] water = GameObject.FindGameObjectsWithTag(name);
+        foreach (GameObject w in water)
+        {
+            DestroyImmediate(w, true);
+        }
+    }
+
+
+
+    public void CheckGegenstaende()
+    {
+        //GameObject[] alleGegenstaende = GameObject.FindObjectsOfType<GegenstandBewegung>();
+        GegenstandBewegung[] alleGegenstaende = (GegenstandBewegung[])GameObject.FindObjectsOfType(typeof(GegenstandBewegung));
+        
+
+        //bool liegtUebereinander = true;
+        //while (liegtUebereinander)
+        //{
+        //    liegtUebereinander = false;
+        //    for (int i = 0; i < alleGegenstaende.Length; i++)
+        //    {
+        //        for(int j = 0; j < alleGegenstaende.Length; j++)
+        //        {
+        //            if(alleGegenstaende[i].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index == alleGegenstaende[j].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index && i != j)
+        //            {
+        //                Debug.Log("Liegt Übereinadner");
+        //                Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index + "" + alleGegenstaende[i] + "" + alleGegenstaende[j].GetComponent<GegenstandBewegung>().index + "" + alleGegenstaende[j]);
+        //                Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index);
+        //                alleGegenstaende[i].GetComponent<GegenstandBewegung>().StepBack();
+        //                Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index);
+        //            }
+        //        }
+        //    }
+        //}
+
+
+        for (int i = 0; i < alleGegenstaende.Length; i++) {
+            Debug.Log(alleGegenstaende[i]);
+            Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index);
+        }
+
+
+
+
+        //Controller[] myItems = FindObjectsOfType(typeof(Controller)) as Controller[];
+        //Debug.Log("Found " + myItems.Length + " instances with this script attached");
+        //foreach (Controller item in myItems)
+        //{
+        //    Debug.Log(item.gameObject.name);
+        //}
+    }
 }

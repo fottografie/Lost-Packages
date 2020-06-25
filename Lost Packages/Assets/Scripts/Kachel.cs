@@ -204,7 +204,12 @@ public class Kachel : MonoBehaviour
     {
         DestroyImmediate(ripple, true);
         ripple = Instantiate(rippleObject, transform.position, Quaternion.Euler(0, 0, 0));
-        //DestroyImmediate(particles, true);
-        //particles = Instantiate(particlesObject, transform.position, Quaternion.Euler(0, 0, 0));
+        StartCoroutine(DelayDestroy());
+    }
+
+    IEnumerator DelayDestroy()
+    {
+        yield return new WaitForSeconds(1.5f);
+        DestroyImmediate(ripple, true);
     }
 }
