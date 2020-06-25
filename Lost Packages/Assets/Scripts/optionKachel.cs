@@ -30,7 +30,7 @@ public class OptionKachel : MonoBehaviour
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().PlayerStuck();
 
             //Sound
-            FindObjectOfType<AudioManager>().PlayRandomOfKind("WaterSound", 8);
+            FindObjectOfType<AudioManager>().PlayRandomOfKind("WaterSplash2_", 7);
 
             DestroyImmediate(ripple, true);
             ripple = Instantiate(rippleAnimation, transform.position, Quaternion.Euler(0, 0, 0));
@@ -134,13 +134,14 @@ public class OptionKachel : MonoBehaviour
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ShowZuege();
 
             //Überprüfung ob der Spieler gewonnen hat (ob er auf dem gleichen Feld wie das Paket steht)
-            if (index == GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index)
+            if (index == GameObject.FindGameObjectWithTag("Paket").GetComponent<GegenstandBewegung>().index)
             {
                 PlayerPrefs.SetInt("Zuganzahl", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetZuege());
                 PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().level);
                 PlayerPrefs.SetInt("maxZuege", GameObject.Find("GameManager").GetComponent<GameManager>().maxZuege);
                 //GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Win");
 
+                FindObjectOfType<AudioManager>().Play("WinSound");
                 SceneManager.LoadScene("Win", LoadSceneMode.Additive);
             }
 
@@ -164,13 +165,10 @@ public class OptionKachel : MonoBehaviour
 
     private void Update()
     {
-
-
         if (!GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().finishedAnimating && WaterSplash != null)
         {
             WaterSplash.transform.position = GameObject.FindGameObjectWithTag("Spieler").transform.position;
         }
-        
     }
 
 
@@ -198,12 +196,12 @@ public class OptionKachel : MonoBehaviour
         }
 
         GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index = index;
-        GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().GetToNextField();
+        GameObject.FindGameObjectWithTag("Paket").GetComponent<GegenstandBewegung>().GetToNextField();
         GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().ShowOptions();
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().SetZuege(-1);
 
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().spielerIndex = index;
-        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().paketIndex = GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index;
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().paketIndex = GameObject.FindGameObjectWithTag("Paket").GetComponent<GegenstandBewegung>().index;
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().SetBelegteFelder();
     }
 

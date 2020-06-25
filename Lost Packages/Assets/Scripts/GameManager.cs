@@ -254,7 +254,7 @@ public class GameManager : MonoBehaviour
 
         belegteFelder[spielerIndex] = 0;
         belegteFelder[paketIndex] = 0;
-        belegteFelder[GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().next.GetComponent<Kachel>().index] = 0;
+        belegteFelder[GameObject.FindGameObjectWithTag("Paket").GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index] = 0;
 
 
         //Steine
@@ -347,31 +347,32 @@ public class GameManager : MonoBehaviour
         GegenstandBewegung[] alleGegenstaende = (GegenstandBewegung[])GameObject.FindObjectsOfType(typeof(GegenstandBewegung));
         
 
-        //bool liegtUebereinander = true;
-        //while (liegtUebereinander)
-        //{
-        //    liegtUebereinander = false;
-        //    for (int i = 0; i < alleGegenstaende.Length; i++)
-        //    {
-        //        for(int j = 0; j < alleGegenstaende.Length; j++)
-        //        {
-        //            if(alleGegenstaende[i].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index == alleGegenstaende[j].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index && i != j)
-        //            {
-        //                Debug.Log("Liegt Übereinadner");
-        //                Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index + "" + alleGegenstaende[i] + "" + alleGegenstaende[j].GetComponent<GegenstandBewegung>().index + "" + alleGegenstaende[j]);
-        //                Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index);
-        //                alleGegenstaende[i].GetComponent<GegenstandBewegung>().StepBack();
-        //                Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index);
-        //            }
-        //        }
-        //    }
-        //}
-
-
-        for (int i = 0; i < alleGegenstaende.Length; i++) {
-            Debug.Log(alleGegenstaende[i]);
-            Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index);
+        bool liegtUebereinander = true;
+        while (liegtUebereinander)
+        {
+            liegtUebereinander = false;
+            for (int i = 0; i < alleGegenstaende.Length; i++)
+            {
+                for(int j = 0; j < alleGegenstaende.Length; j++)
+                {
+                    if(alleGegenstaende[i].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index == alleGegenstaende[j].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index && i != j)
+                    {
+                        Debug.Log("Liegt Übereinadner");
+                        Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index + "" + alleGegenstaende[i] + "" + alleGegenstaende[j].GetComponent<GegenstandBewegung>().index + "" + alleGegenstaende[j]);
+                        Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index);
+                        alleGegenstaende[i].GetComponent<GegenstandBewegung>().StepBack();
+                        Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().next.GetComponent<Kachel>().index);
+                        liegtUebereinander = true;
+                    }
+                }
+            }
         }
+
+
+        //for (int i = 0; i < alleGegenstaende.Length; i++) {
+        //    Debug.Log(alleGegenstaende[i]);
+        //    Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index);
+        //}
 
 
 

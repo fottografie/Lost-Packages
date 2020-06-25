@@ -64,6 +64,7 @@ public class AudioManager : MonoBehaviour
         }
         int r = Random.Range(0, elements.Length);
 
+        Debug.Log(elements[r]);
         elements[r].source.Play();
     }
 }

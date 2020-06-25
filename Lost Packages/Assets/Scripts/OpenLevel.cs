@@ -28,13 +28,13 @@ public class OpenLevel : MonoBehaviour
             int nextLevel = PlayerPrefs.GetInt("NextScene");
             if (wiederholen)
             {
-                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
+                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
                 Debug.Log(PlayerPrefs.GetInt("aktuellesLevel"));
                 GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + PlayerPrefs.GetInt("aktuellesLevel"));
             }
             else
             {
-                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
+                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
                 if(nextLevel + 1 >= 6)
                 {
                     GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Start");
@@ -49,7 +49,7 @@ public class OpenLevel : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("Coins") >= minCoins)
             {
-                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
+                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
                 GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
             }
             else
@@ -62,7 +62,7 @@ public class OpenLevel : MonoBehaviour
     //Für Buttons
     public void LoadMenu()
     {
-        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
         if (PlayerPrefs.GetInt("Menue") == 1)
         {
             PlayerPrefs.SetInt("Menue", 0);
@@ -77,14 +77,14 @@ public class OpenLevel : MonoBehaviour
 
     public void UnloadMenue()
     {
-        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
         SceneManager.UnloadSceneAsync("Menue");
         PlayerPrefs.SetInt("Menue", 0);
     }
 
     public void LoadLevel()
     {
-        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
         if (wiederholen)
         {
             GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel("Level0" + PlayerPrefs.GetInt("aktuellesLevel"));
@@ -105,7 +105,7 @@ public class OpenLevel : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("Coins") >= minCoins)
             {
-                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit", 2);
+                FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
                 GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
             }
             else

@@ -230,3 +230,93 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: WinSound
+    clip: {fileID: 8300000, guid: c451ce21952f34882b318b6c5d9d35e1, type: 3}
+    volume: 0.503
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WaterSplash2_01
+    clip: {fileID: 8300000, guid: 440a5fd02e7d84c56a4c13d29473a174, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WaterSplash2_02
+    clip: {fileID: 8300000, guid: f467fafc83325463392af2a4e7a58044, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WaterSplash2_03
+    clip: {fileID: 8300000, guid: 85236ea60fce449968bf8d3c042c5e0e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WaterSplash2_04
+    clip: {fileID: 8300000, guid: 109b9141924e44a4f897fc92a31f43fb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WaterSplash2_05
+    clip: {fileID: 8300000, guid: 42a1f9a31d93f44d3a8b484f7ab5bdfc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WaterSplash2_06
+    clip: {fileID: 8300000, guid: 2fe472cf2df464c1d9e9f28ebf6be50e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WaterSplash2_07
+    clip: {fileID: 8300000, guid: c4264a834c7e04984b4db955f64d4179, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonHit2_01
+    clip: {fileID: 8300000, guid: dd4e8c7ce4cc2490cb7941f493a186f5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonHit2_02
+    clip: {fileID: 8300000, guid: 2f6acb05807ed469ca7b6d8343deb17a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonHit2_03
+    clip: {fileID: 8300000, guid: c867b10349ca44c0cb28cc97c228c999, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonHit2_04
+    clip: {fileID: 8300000, guid: 52a8f44fd331742c2b19f21d33bbbcd8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonHit2_05
+    clip: {fileID: 8300000, guid: cbed1a233e4ab44cfad13d72299eec6a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonHit2_06
+    clip: {fileID: 8300000, guid: dd050b3a4fa7b474886ada430e645861, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonHit2_07
+    clip: {fileID: 8300000, guid: b69d68f9f18a746af950903ad3a00e93, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
