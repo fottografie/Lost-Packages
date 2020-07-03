@@ -85,6 +85,7 @@ public class GegenstandBewegung : MonoBehaviour
             if (!next.GetComponent<Kachel>().clear)
             {
                 next = current;
+                
             }
 
             GameObject.Find("Kachel " + index).GetComponent<Kachel>().clear = true;
@@ -98,10 +99,9 @@ public class GegenstandBewegung : MonoBehaviour
                 GameObject.Find("Kachel " + index).GetComponent<Kachel>().fischernetz = false;
                 next.GetComponent<Kachel>().fischernetz = true;
             }
-            else
-            {
-                next.GetComponent<Kachel>().clear = false;
-            }
+
+            next.GetComponent<Kachel>().clear = false;
+           
 
             if (coin) {
                 next.GetComponent<Kachel>().package = true;
@@ -109,7 +109,7 @@ public class GegenstandBewegung : MonoBehaviour
 
             if (next != GameObject.Find("Kachel " + index) && !GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool && GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index != index)
             {
-                belegtHolzPfeil = Instantiate(belegtHolzPfeilObject, GameObject.Find("Kachel " + index).transform.position, GameObject.Find("Kachel " + index).transform.rotation);
+                belegtHolzPfeil = Instantiate(belegtHolzPfeilObject, GameObject.Find("Kachel " + index).transform.position, Quaternion.Euler(0,0,GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle));
                 //belegtHolz = Instantiate(belegtHolzObject, next.transform.position, Quaternion.Euler(0, 0, 0));
             }
             else if (next == GameObject.Find("Kachel " + index))
@@ -251,6 +251,11 @@ public class GegenstandBewegung : MonoBehaviour
 
     public void StepBack()
     {
+        next.GetComponent<Kachel>().clear = false;
+        next.GetComponent<Kachel>().package = false;
+        current.GetComponent<Kachel>().clear = false;
+        current.GetComponent<Kachel>().package = false;
+
         index = current.GetComponent<Kachel>().index;
         transform.position = current.transform.position;
         start = transform.position;
@@ -267,7 +272,7 @@ public class GegenstandBewegung : MonoBehaviour
             DestroyImmediate(belegtHolzPfeil, true);
         }
 
-
+        
         GetFlowFromIndex();
     }
 }

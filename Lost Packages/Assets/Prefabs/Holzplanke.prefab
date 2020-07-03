@@ -95,17 +95,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a30123142c9d44c8833581ddf9d6603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paketBool: 0
   index: 0
   next: {fileID: 0}
   belegtHolzObject: {fileID: 6946023892275767005, guid: 7044965d8ae0e4895b31049e4ce421ba,
     type: 3}
+  belegtHolz: {fileID: 0}
   belegtHolzPfeilObject: {fileID: 2716038601568895929, guid: 6d5e99c900f1a4a5ea4e88dcad2c283b,
     type: 3}
+  belegtHolzPfeil: {fileID: 0}
+  belegtPaket: {fileID: 0}
+  belegtPaketPfeil: {fileID: 0}
+  belegtPaketTemp: {fileID: 0}
+  belegtPaketPfeilTemp: {fileID: 0}
+  fischernetzBool: 0
   start: {x: 0, y: 0, z: 0}
   ende: {x: 0, y: 0, z: 0}
   richtung: {x: 0, y: 0, z: 0}
   strudelAnimation: {fileID: 8471216788786131374, guid: 5dd89253311424009bf9e69be7d6377a,
     type: 3}
+  coin: 0
+  coinExplosion: {fileID: 0}
+  coinSound: {fileID: 0}
 --- !u!95 &6917522683686478302
 Animator:
   serializedVersion: 3

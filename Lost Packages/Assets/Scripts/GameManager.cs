@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
         ShowZuege();
         belegteFelder = gegenstandSpots;
 
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().ResetVolume("BackgroundWaves");
         FindObjectOfType<AudioManager>().Play("BackgroundWaves");
         //FindObjectOfType<AudioManager>().Play("Theme");
 
@@ -227,7 +229,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowZuege()
     {
-        if (zuege > 5)
+        if (zuege > 3)
         {
             zuegeLabel.GetComponent<Text>().text = "Verbleibende Züge: " + zuege;
         }
@@ -367,21 +369,20 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
 
 
-        //for (int i = 0; i < alleGegenstaende.Length; i++) {
-        //    Debug.Log(alleGegenstaende[i]);
-        //    Debug.Log(alleGegenstaende[i].GetComponent<GegenstandBewegung>().index);
-        //}
+    public void Win()
+    {
+        StartCoroutine(WaitForWin());
+    }
 
 
+    IEnumerator WaitForWin()
+    {
+        yield return new WaitForSeconds(1f);
 
-
-        //Controller[] myItems = FindObjectsOfType(typeof(Controller)) as Controller[];
-        //Debug.Log("Found " + myItems.Length + " instances with this script attached");
-        //foreach (Controller item in myItems)
-        //{
-        //    Debug.Log(item.gameObject.name);
-        //}
+        FindObjectOfType<AudioManager>().Play("WinSound");
+        SceneManager.LoadScene("Win", LoadSceneMode.Additive);
     }
 }

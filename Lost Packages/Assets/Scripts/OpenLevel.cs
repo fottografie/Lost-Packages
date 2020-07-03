@@ -77,6 +77,7 @@ public class OpenLevel : MonoBehaviour
 
     public void UnloadMenue()
     {
+        GameObject.Find("MusikVol").GetComponent<SetVolume>().SaveSoundSettings();
         FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
         SceneManager.UnloadSceneAsync("Menue");
         PlayerPrefs.SetInt("Menue", 0);

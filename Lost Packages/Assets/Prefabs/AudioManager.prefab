@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7314583270747234453}
   - component: {fileID: 7314583270747234452}
+  - component: {fileID: 558388391}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -45,278 +46,380 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: CoinSound01
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 9563048b6fc3f48c7801500daf878848, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: CoinSound02
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 935c51094ac80485ea7fc097d97ec70a, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: CoinSound03
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: f10f898f43ec544b8b761c8d0ce1a4f7, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: CoinSound04
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 8d1bd7a3ba6f24842842016e0fb0d706, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: CoinSound05
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: b94716c78148141fbb5733afc6cc7472, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonHit01
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: ba44475a747494557bb9647edbab8d30, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonHit02
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 76c9ee5e3c6894f35b1a135e5dd7f138, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSound01
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: d788a6b859da046efb92093defb042ac, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: BackgroundWaves
+    output: {fileID: 204547735183943934, guid: 4ac3e7d7a7f294330b498c656d88cf36, type: 2}
     clip: {fileID: 8300000, guid: 1b87dc6b7666c41f1a43afa400fb2274, type: 3}
-    volume: 1
+    volume: 0.498
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Wind
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 2b03b5652b9a64db3bb829e264916079, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Wind
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 2b03b5652b9a64db3bb829e264916079, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSound02
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: b2ac1785fc31d488984bf27494fb2a19, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSound03
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 0de9a10aeb4434afcb0ca5c56ebe4fad, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSound04
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 22fca0a38b65e4e2db9e2234e578c8f6, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSound05
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 695ec8b5c538946f3990b94cdf93c7e3, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSound06
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: a3fe21635c818483eb0f71d95ef15981, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSound07
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 171b7085baee44af1a893ab6dfdd5c34, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSound08
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 3b73c44a483364cc5b98023cdf3a9f51, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Theme
+    output: {fileID: 204547735183943934, guid: 4ac3e7d7a7f294330b498c656d88cf36, type: 2}
     clip: {fileID: 8300000, guid: 370e3d17c14e54c7f916570e7b678c20, type: 3}
     volume: 0.414
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Feuer
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 302d1ab509e7d4e6893413eb0d8b1a03, type: 3}
     volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound01
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: ec80150286eb5479b9b8844fed96c9e3, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound02
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 6dd79ed149185488eb6fe1964af71bb8, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound03
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 47fdf84e4616d488db59a2002554afc1, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound04
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: fac62502a8eb445bfbbae635e37ea186, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound05
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 1a7c7f4d574f74b0cb2e6c741d047f52, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound06
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: d1c4d1846c726424d8a27a98eec40969, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound07
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: eac530b92faa04e1a92ad7aee3ed7e15, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound08
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 7b09d5938fc6049ba9bab1c163f7729c, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound09
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 100c3d84109994e80942fd97a9dbbdef, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound10
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 6b751251110bb40de83006b791292f4b, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: KeyboardSound11
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: f5014565e43ab4b4784f31268fe117d0, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WinSound
+    output: {fileID: 204547735183943934, guid: 4ac3e7d7a7f294330b498c656d88cf36, type: 2}
     clip: {fileID: 8300000, guid: c451ce21952f34882b318b6c5d9d35e1, type: 3}
-    volume: 0.503
+    volume: 0.267
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSplash2_01
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 440a5fd02e7d84c56a4c13d29473a174, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSplash2_02
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: f467fafc83325463392af2a4e7a58044, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSplash2_03
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 85236ea60fce449968bf8d3c042c5e0e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSplash2_04
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 109b9141924e44a4f897fc92a31f43fb, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSplash2_05
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 42a1f9a31d93f44d3a8b484f7ab5bdfc, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSplash2_06
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 2fe472cf2df464c1d9e9f28ebf6be50e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaterSplash2_07
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: c4264a834c7e04984b4db955f64d4179, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonHit2_01
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: dd4e8c7ce4cc2490cb7941f493a186f5, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonHit2_02
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 2f6acb05807ed469ca7b6d8343deb17a, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonHit2_03
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: c867b10349ca44c0cb28cc97c228c999, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonHit2_04
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: 52a8f44fd331742c2b19f21d33bbbcd8, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonHit2_05
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: cbed1a233e4ab44cfad13d72299eec6a, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonHit2_06
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: dd050b3a4fa7b474886ada430e645861, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonHit2_07
+    output: {fileID: -5458971053999866139, guid: 4ac3e7d7a7f294330b498c656d88cf36,
+      type: 2}
     clip: {fileID: 8300000, guid: b69d68f9f18a746af950903ad3a00e93, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+--- !u!114 &558388391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7314583270747234458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271f6fe66a35549c5a2c4fad551cc6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 4ac3e7d7a7f294330b498c656d88cf36, type: 2}

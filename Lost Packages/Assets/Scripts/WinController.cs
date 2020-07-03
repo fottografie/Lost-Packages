@@ -17,7 +17,8 @@ public class WinController : MonoBehaviour
         zuege = PlayerPrefs.GetInt("Zuganzahl");
         zuegeLabel.GetComponent<Text>().text = "Du hast " + (PlayerPrefs.GetInt("maxZuege") - zuege) + " Züge benötigt";
 
-        anzahl = 10;
+        anzahl = 5;
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().FadeOutController("BackgroundWaves");
         StartCoroutine(AddOne());
     }
 

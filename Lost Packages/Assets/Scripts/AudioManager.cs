@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        
         DontDestroyOnLoad(gameObject);
 
         foreach(Sound s in sounds)
@@ -30,11 +30,14 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
 
             s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
+            s.source.pitch = s.pitch;            
 
             s.source.loop = s.loop;
+
+            s.source.outputAudioMixerGroup = s.output;
         }
     }
+
 
     public void Play(string name)
     {
@@ -64,7 +67,28 @@ public class AudioManager : MonoBehaviour
         }
         int r = Random.Range(0, elements.Length);
 
-        Debug.Log(elements[r]);
         elements[r].source.Play();
+    }
+
+    public void FadeOutController(string name)
+    {
+        StartCoroutine(FadeOut(name));
+    }
+
+    IEnumerator FadeOut(string name2)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name2);
+        while (s.source.volume > 0)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            s.source.volume = s.source.volume - 0.1f;
+        }
+    }
+
+    public void ResetVolume(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.volume = s.volume;
     }
 }

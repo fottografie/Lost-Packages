@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1626,11 +1626,11 @@ MonoBehaviour:
     sentences:
     - Hey, Ich bin Mia.
     - Leider ist mein Paket auf dem Weg zu mir im Meer verloren gegangen.
-    - Hilfst du mir zu ihm zu gelangen?
+    - Hilfst du mir es zu erreichen?
     - "Super, dann erkl\xE4re Ich dir kurz, wie Ich mich bewegen kann."
     - "Ich kann mich auf alle Felder bewegen, die gr\xFCn markiert sind."
     - Wenn Ich das gold markierte Feld erreiche, habe Ich das Paket erreicht.
-    - 'Aber vorsicht! Das Paket bewegt sich ebenfalls jedes mal, wenn Ich mich bewege. '
+    - 'Aber Vorsicht! Das Paket bewegt sich ebenfalls jedes mal, wenn Ich mich bewege. '
 --- !u!4 &751418856
 Transform:
   m_ObjectHideFlags: 0
@@ -2575,7 +2575,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ButtonHit01
+          m_StringArgument: ButtonHit2_01
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1448342017
@@ -3112,75 +3112,6 @@ Transform:
   m_Father: {fileID: 292390875}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2109491287
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073808, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741754317389073811, guid: b37d8427322c447a6a87dfecd28bf607,
-        type: 3}
-      propertyPath: m_Name
-      value: Lagerfeuer
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b37d8427322c447a6a87dfecd28bf607, type: 3}
 --- !u!1001 &1779501898236846631
 PrefabInstance:
   m_ObjectHideFlags: 0
