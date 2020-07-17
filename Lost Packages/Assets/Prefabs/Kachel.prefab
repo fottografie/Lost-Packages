@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 478773389789044884}
   - component: {fileID: 661019949405813411}
   - component: {fileID: 2173214021681764632}
+  - component: {fileID: 417750997662893702}
   m_Layer: 0
   m_Name: Kachel
   m_TagString: Kachel
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5298586997365516872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.57, y: 3.54, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,8 +95,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48f261bf4e694774b50211933575b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfeil: {fileID: 6253173358134158423, guid: f6787b8d2a8f648c99463b6bdca4fe22, type: 3}
   index: 0
+  clear: 0
+  package: 0
+  kachelObject: {fileID: 2500308281465189431, guid: b12045c095693466bafa1b8357f425df,
+    type: 3}
+  pfeilObject: {fileID: 2372962407681523304, guid: 6e82a54ab7b86400e98f9f12ad13272a,
+    type: 3}
   neighbours:
   - {fileID: 0}
   - {fileID: 0}
@@ -104,3 +110,37 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   flow: {fileID: 0}
+  flowAngle: 0
+  altPfeilObject: {fileID: 4143569002863587185, guid: b72e352c2c5e34ed7b94d608244082bd,
+    type: 3}
+  altFlowAngle: 0
+  altFlowBool: 0
+  altFlow: {fileID: 0}
+  strudelBool: 0
+  strudelObject: {fileID: 6376324333053372829, guid: 426fae9551e65414a99aea2841271c3b,
+    type: 3}
+  stoneBool: 0
+  stone: {fileID: 3721236038831746277, guid: c369f267c2fc44e84b73ac9e50592675, type: 3}
+  fischernetz: 0
+  rippleObject: {fileID: 8329105336774899294, guid: 5af64ed2df4da45cfb72c17661e85548,
+    type: 3}
+  ripple: {fileID: 0}
+  particlesObject: {fileID: 7560434591588614333, guid: aa251b01d3cc94ca5a86502cd5c0eee0,
+    type: 3}
+  particles: {fileID: 0}
+--- !u!58 &417750997662893702
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5298586997365516872}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.5749998

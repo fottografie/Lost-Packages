@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7676289074116427347}
   - component: {fileID: 6270071620051707138}
   - component: {fileID: 2590655494173205497}
+  - component: {fileID: 6917522683686478302}
   m_Layer: 0
   m_Name: Holzplanke
   m_TagString: Holzplanke
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 3ed294b0b9ed44207ab1827adb8d8c17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -94,6 +95,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a30123142c9d44c8833581ddf9d6603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startIndex: 0
+  paketBool: 0
   index: 0
   next: {fileID: 0}
+  belegtHolzObject: {fileID: 6946023892275767005, guid: 7044965d8ae0e4895b31049e4ce421ba,
+    type: 3}
+  belegtHolz: {fileID: 0}
+  belegtHolzPfeilObject: {fileID: 2716038601568895929, guid: 6d5e99c900f1a4a5ea4e88dcad2c283b,
+    type: 3}
+  belegtHolzPfeil: {fileID: 0}
+  belegtPaket: {fileID: 0}
+  belegtPaketPfeil: {fileID: 0}
+  belegtPaketTemp: {fileID: 0}
+  belegtPaketPfeilTemp: {fileID: 0}
+  fischernetzBool: 0
+  start: {x: 0, y: 0, z: 0}
+  ende: {x: 0, y: 0, z: 0}
+  richtung: {x: 0, y: 0, z: 0}
+  strudelAnimation: {fileID: 8471216788786131374, guid: 5dd89253311424009bf9e69be7d6377a,
+    type: 3}
+  coin: 0
+  coinExplosion: {fileID: 0}
+  coinSound: {fileID: 0}
+--- !u!95 &6917522683686478302
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183051222117976795}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 20b66f9435dd54611a9bc2a23ba18676, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

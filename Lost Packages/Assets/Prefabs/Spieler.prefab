@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9131564371764083830}
   - component: {fileID: 3616717498849989008}
   - component: {fileID: 4403683520741861537}
+  - component: {fileID: 3070977258614613750}
   m_Layer: 0
   m_Name: Spieler
   m_TagString: Spieler
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 9903e5703df0f4328a32fc933de185e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,14 +97,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionKachel: {fileID: 4851008466919434495, guid: ce89e5df1b0d445cf8e10f06a030150c,
     type: 3}
-  optionKachelrot: {fileID: 1235871180643050440, guid: 6024f9ca15d9a4a74b6e9a3763a82440,
+  optionPfeil: {fileID: 7135651980609093107, guid: fba1ddc3c8300477a9caeb4c7e2045af,
     type: 3}
   options:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  felder:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   index: 0
+  minimumRounds: 0
+  start: {x: 0, y: 0, z: 0}
+  ende: {x: 0, y: 0, z: 0}
+  richtung: {x: 0, y: 0, z: 0}
+--- !u!95 &3070977258614613750
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781370995605928531}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f767c6d0f78014fcf910c5be0ec071ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

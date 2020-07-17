@@ -4,35 +4,275 @@ using UnityEngine;
 
 public class GegenstandBewegung : MonoBehaviour
 {
+    public bool paketBool;
+
     public int index;
     public GameObject next;
-    public GameObject old;
+    private GameObject current;
+    private GameObject old;
+
+    public GameObject belegtHolzObject;
+    public GameObject belegtHolz;
+
+    public GameObject belegtHolzPfeilObject;
+    public GameObject belegtHolzPfeil;
+
+
+    public GameObject belegtPaket;
+    public GameObject belegtPaketPfeil;
+    public GameObject belegtPaketTemp, belegtPaketPfeilTemp;
+
+
+    public bool fischernetzBool;
+
+    public Vector3 start;
+    public Vector3 ende;
+    public Vector3 richtung;
+
+    public GameObject strudelAnimation;
+    private GameObject strudel;
+
+    public bool coin;
+    public GameObject coinExplosion;
+    public AudioSource coinSound;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        GetFlowFromIndex();
+        if (paketBool)
+        {
+            index = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().paketStartIndex;
+            GetFlowFromIndex();
+            old = current;
+            start = transform.position;
+            ende = transform.position;
+        }
+        else
+        {
+            GetFlowFromIndex();
+            old = current;
+            start = transform.position;
+            ende = transform.position;
+        }
     }
 
+    //Setzt next auf das Feld in Flussrichtung, wenn es nicht von einem Gegenstand belegt ist und instantiiert darauf ein belegt-Feld
     void GetFlowFromIndex()
     {
-        old = next;
-        GameObject f = GameObject.Find("Kachel " + index);
-        next = f.GetComponent<Kachel>().flow;
-        if (next.GetComponent<Kachel>().clear == false)
+        if (paketBool)
         {
-            next = old;
+            current = GameObject.Find("Kachel " + index);
+            next = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
+            if (next.GetComponent<Kachel>().clear == false || GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index == next.GetComponent<Kachel>().index)
+            {
+                next = current;
+            }
+
+            next.GetComponent<Kachel>().clear = false;
+            next.GetComponent<Kachel>().package = true;
+
+            belegtPaketTemp = Instantiate(belegtPaket, next.transform.position, Quaternion.identity);
+
+            if (next != GameObject.Find("Kachel " + index) && !GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool)
+            {
+                belegtPaketPfeilTemp = Instantiate(belegtPaketPfeil, GameObject.Find("Kachel " + index).transform.position, Quaternion.Euler(0, 0, (float)GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle));
+            }
         }
-        next.GetComponent<Kachel>().clear = false;
+        else {
+            current = GameObject.Find("Kachel " + index);
+            next = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flow;
+            if (!next.GetComponent<Kachel>().clear)
+            {
+                next = current;
+                
+            }
+
+            GameObject.Find("Kachel " + index).GetComponent<Kachel>().clear = true;
+            if (coin)
+            {
+                GameObject.Find("Kachel " + index).GetComponent<Kachel>().package = false;
+            }
+
+            if (fischernetzBool)
+            {
+                GameObject.Find("Kachel " + index).GetComponent<Kachel>().fischernetz = false;
+                next.GetComponent<Kachel>().fischernetz = true;
+            }
+
+            next.GetComponent<Kachel>().clear = false;
+           
+
+            if (coin) {
+                next.GetComponent<Kachel>().package = true;
+            }
+
+            if (next != GameObject.Find("Kachel " + index) && !GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool && GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index != index)
+            {
+                belegtHolzPfeil = Instantiate(belegtHolzPfeilObject, GameObject.Find("Kachel " + index).transform.position, Quaternion.Euler(0,0,GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle));
+                //belegtHolz = Instantiate(belegtHolzObject, next.transform.position, Quaternion.Euler(0, 0, 0));
+            }
+            else if (next == GameObject.Find("Kachel " + index))
+            {
+                belegtHolz = Instantiate(belegtHolzObject, next.transform.position, Quaternion.Euler(0, 0, 0));
+                next.GetComponent<Kachel>().clear = false;
+            }
+        }
+    }
+
+    //Der Gegenstand wird auf das nächste Feld gesetzt, die alten belegten Kacheln werden entfernt und GetFlowFromIndex wird erneut aufgerufen
+    public void GetToNextField()
+    {
+        if (paketBool)
+        {
+            GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().clear = true;
+            GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().package = false;
+
+            if (GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlowBool)
+            {
+                GameObject.Find("Kachel " + index).GetComponent<Kachel>().ChangePfeil();
+            }
+
+            if (next.GetComponent<Kachel>().strudelBool)
+            {
+                transform.position = next.transform.position;
+                DestroyImmediate(strudel, true);
+                strudel = Instantiate(strudelAnimation, next.GetComponent<Kachel>().flow.transform.position, Quaternion.Euler(0, 0, 0));
+
+                next = next.GetComponent<Kachel>().flow;
+                transform.position = next.transform.position;
+                ende = transform.position;
+                start = transform.position;
+            }
+            else
+            {
+                ende = next.transform.position;
+            }
+
+            index = next.GetComponent<Kachel>().index;
+
+            DestroyImmediate(belegtPaketTemp, true);
+            DestroyImmediate(belegtPaketPfeilTemp, true);
+
+            old = current;
+            GetFlowFromIndex();
+        }
+        else
+        {
+        //GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().clear = true;
+        //if (coin)
+        //{
+        //    GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().package = false;
+        //}
+
+        //Alt Flow
+        if (GameObject.Find("Kachel " + index).GetComponent<Kachel>().altFlowBool)
+        {
+            GameObject.Find("Kachel " + index).GetComponent<Kachel>().ChangePfeil();
+        }
+
+        //Strudel
+        if (next.GetComponent<Kachel>().strudelBool)
+        {
+            transform.position = next.transform.position;
+            DestroyImmediate(strudel, true);
+            strudel = Instantiate(strudelAnimation, next.GetComponent<Kachel>().flow.transform.position, Quaternion.Euler(0, 0, 0));
+
+            next = next.GetComponent<Kachel>().flow;
+            transform.position = next.transform.position;
+            ende = transform.position;
+            start = transform.position;
+        }
+        else
+        {
+            ende = next.transform.position;
+        }
+
+        index = next.GetComponent<Kachel>().index;
+
+        DestroyImmediate(belegtHolz, true);
+        DestroyImmediate(belegtHolzPfeil, true);
+
+        old = current;
+        GetFlowFromIndex();
+        }
+    }
+
+    //Für Gegenstands Animation 
+    private void FixedUpdate()
+    {
+        if (start != ende)
+        {
+            start = ZugAnimation();
+            transform.position = start;
+        }
+    }
+
+    //Gegenstands Animation
+    Vector3 ZugAnimation()
+    {
+        richtung = ende - start;
+        richtung = Vector3.ClampMagnitude(richtung, 0.05f);
+
+        Vector3 newStart;
+        newStart = start + richtung;
+
+        return newStart;
     }
 
 
-    public void GetToNextField()
+    public void CoinExplosion()
     {
-        transform.position = next.transform.position;
-        index = next.GetComponent<Kachel>().index;
+        StartCoroutine(WaitToExplode());
+        StartCoroutine(WaitToDelete());
+    }
+
+
+    IEnumerator WaitToExplode()
+    {
+        yield return new WaitForSeconds(0.4f);
+        Instantiate(coinExplosion, transform.position, Quaternion.Euler(0, 0, 0));
+
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("CoinSound", 5);
+    }
+
+    IEnumerator WaitToDelete()
+    {
+        yield return new WaitForSeconds(0.6f);
+        next.GetComponent<Kachel>().clear = true;
+        GameObject.Find("Kachel " + next.GetComponent<Kachel>().index).GetComponent<Kachel>().package = false;
+
+        DestroyImmediate(belegtHolz, true);
+        DestroyImmediate(belegtHolzPfeil, true);
+        DestroyImmediate(gameObject, true);
+        yield return new WaitForSeconds(.1f);
+        DestroyImmediate(coinExplosion, true);
+    }
+
+    public void StepBack()
+    {
+        next.GetComponent<Kachel>().clear = false;
+        next.GetComponent<Kachel>().package = false;
+        current.GetComponent<Kachel>().clear = false;
+        current.GetComponent<Kachel>().package = false;
+
+        index = current.GetComponent<Kachel>().index;
+        transform.position = current.transform.position;
+        start = transform.position;
+        ende = transform.position;
+
+        if (paketBool)
+        {
+            DestroyImmediate(belegtPaketTemp, true);
+            DestroyImmediate(belegtPaketPfeilTemp, true);
+        }
+        else
+        {
+            DestroyImmediate(belegtHolz, true);
+            DestroyImmediate(belegtHolzPfeil, true);
+        }
+
         
         GetFlowFromIndex();
     }
-
 }

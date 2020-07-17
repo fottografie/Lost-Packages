@@ -11,6 +11,17 @@ TagManager:
   - Spieler
   - Background
   - optionKachel
+  - KachelBelegt
+  - belegtPaket
+  - belegtPaketPfeil
+  - strudelAnimation
+  - Fischernetz
+  - GameManager
+  - DialogueManager
+  - Coin
+  - WaterSplashes
+  - CoinExplosion
+  - ripple
   layers:
   - Default
   - TransparentFX
@@ -20,7 +31,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Gegenstand
   - 
   - 
   - 

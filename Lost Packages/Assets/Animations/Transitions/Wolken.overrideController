@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Wolken
+  m_Controller: {fileID: 9100000, guid: e2f80b8cfc1664debba47e1cff8782c1, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: ddf2f315b15734d8ab5449bdf30d0574, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 014b25cdfa5d7411daa3b838dc9c0fa8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 695a714df846f400db020037cedad5e7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ac85bdb14a8f643008e5867841441283, type: 2}
