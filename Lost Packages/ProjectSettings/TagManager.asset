@@ -22,6 +22,9 @@ TagManager:
   - WaterSplashes
   - CoinExplosion
   - ripple
+  - CoinLabelShop
+  - CoinLabelShopText
+  - CoinManager
   layers:
   - Default
   - TransparentFX

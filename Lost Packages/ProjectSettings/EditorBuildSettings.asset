@@ -39,8 +39,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Loose.unity
     guid: 7716006f461d544b38817b356d12255c
   - enabled: 1
+    path: Assets/Scenes/Menue Levelauswahl.unity
+    guid: eb297e21a78624337b39d37f1d970224
+  - enabled: 1
     path: Assets/Scenes/Menue.unity
     guid: c1a4c627bd1454972936a5b443fbdac4
+  - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: ca598fca5692e45b18c65b238d4c92ca
   - enabled: 1
     path: Assets/Scenes/Ende.unity
     guid: 0c8b0d96c31c24d4b9f619cf511103de

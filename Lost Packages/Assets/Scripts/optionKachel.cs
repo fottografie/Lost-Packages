@@ -22,6 +22,8 @@ public class OptionKachel : MonoBehaviour
     public GameObject WaterSplashObject;
     private GameObject WaterSplash;
 
+    private bool winBool = false;
+
     //Wenn der Spieler auf eines der options Felder geklickt hat, werden alle Gegenstände, das Paket und der Spieler ein Feld weiter gesetzt
     private void OnMouseDown()
     {
@@ -131,13 +133,16 @@ public class OptionKachel : MonoBehaviour
                 PlayerPrefs.SetInt("Zuganzahl", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetZuege());
                 PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().level);
                 PlayerPrefs.SetInt("maxZuege", GameObject.Find("GameManager").GetComponent<GameManager>().maxZuege);
+                PlayerPrefs.SetInt("Level0" + GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().level + "Solved", 1);
 
-                GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Win();
+                winBool = true;
+
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().OpenSceneWithDelay("Win");
             }
 
 
             //Überprüfung ob der Spieler verloren hat (ob er keine Züge mehr übrig hat)
-            if (GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetZuege() < 1)
+            if (GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetZuege() < 1 && !winBool)
             {
                 PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().level);
                 SceneManager.LoadScene("Loose", LoadSceneMode.Additive);
@@ -153,9 +158,6 @@ public class OptionKachel : MonoBehaviour
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().DestroyObjects("WaterSplashes");
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().DestroyObjects("ripple");
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().DestroyObjects("CoinExplosion");
-            //StartCoroutine(DelayDestroy("WaterSplashes"));
-            //StartCoroutine(DelayDestroy("ripple"));
-            //StartCoroutine(DelayDestroy("CoinExplosion"));
 
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().CheckGegenstaende();
             
