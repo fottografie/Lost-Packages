@@ -13,4 +13,9 @@ public class CoinsAnzeige : MonoBehaviour
         coinsLabel.GetComponent<Text>().text = "" + PlayerPrefs.GetInt("Coins");
     }
 
+    public void CoinUpdate()
+    {
+        coinsLabel.GetComponent<Text>().text = "" + PlayerPrefs.GetInt("Coins");
+    }
+
 }

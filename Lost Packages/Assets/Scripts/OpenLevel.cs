@@ -9,14 +9,33 @@ public class OpenLevel : MonoBehaviour
 {
     public string levelName;
     public bool wiederholen;
+    public int level;
 
     public int minCoins;
     public Text minCoinLabel;
+
+    public GameObject coinLabel;
+    public GameObject schloss;
 
     private void Start()
     {
         if (minCoinLabel != null) { 
             minCoinLabel.GetComponent<Text>().text = "" + minCoins;
+        }
+
+        if (schloss != null)
+        {
+            //if (minCoins <= PlayerPrefs.GetInt("Coins"))
+            if(PlayerPrefs.GetInt("Level0" + (level-1) + "Solved") == 1)
+            {
+                schloss.active = false;
+                //coinLabel.active = false;
+            }
+            else
+            {
+                schloss.active = true;
+                //coinLabel.active = true;
+            }
         }
     }
 
@@ -83,6 +102,55 @@ public class OpenLevel : MonoBehaviour
         PlayerPrefs.SetInt("Menue", 0);
     }
 
+    //Für Buttons
+    public void LoadLevelauswahlMenu()
+    {
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
+        if (PlayerPrefs.GetInt("Menue") == 1)
+        {
+            PlayerPrefs.SetInt("Menue", 0);
+            SceneManager.UnloadSceneAsync("Menue Levelauswahl");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Menue", 1);
+            SceneManager.LoadScene("Menue Levelauswahl", LoadSceneMode.Additive);
+        }
+    }
+
+    public void UnloadMenueLevelauswahl()
+    {
+        GameObject.Find("MusikVol").GetComponent<SetVolume>().SaveSoundSettings();
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
+        SceneManager.UnloadSceneAsync("Menue Levelauswahl");
+        PlayerPrefs.SetInt("Menue", 0);
+    }
+
+
+    //Für Buttons
+    public void LoadShop()
+    {
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
+        if (PlayerPrefs.GetInt("Shop") == 1)
+        {
+            PlayerPrefs.SetInt("Shop", 0);
+            SceneManager.UnloadSceneAsync("Shop");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Shop", 1);
+            SceneManager.LoadScene("Shop", LoadSceneMode.Additive);
+        }
+    }
+
+    public void UnloadShop()
+    {
+        //GameObject.Find("MusikVol").GetComponent<SetVolume>().SaveSoundSettings();
+        FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
+        SceneManager.UnloadSceneAsync("Shop");
+        PlayerPrefs.SetInt("Shop", 0);
+    }
+
     public void LoadLevel()
     {
         FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
@@ -104,7 +172,7 @@ public class OpenLevel : MonoBehaviour
         }
         else
         {
-            if (PlayerPrefs.GetInt("Coins") >= minCoins)
+            if (PlayerPrefs.GetInt("Level0" + (level - 1) + "Solved") == 1 || level == 0)
             {
                 FindObjectOfType<AudioManager>().PlayRandomOfKind("ButtonHit2_", 7);
                 GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
@@ -116,5 +184,10 @@ public class OpenLevel : MonoBehaviour
         }
 
 
+    }
+
+    public void LoadScene()
+    {
+        GameObject.Find("LevelLoader").GetComponent<LevelLoader>().TransitionToNextLevel(levelName);
     }
 }

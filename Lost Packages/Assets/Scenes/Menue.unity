@@ -556,7 +556,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1427132454}
-        m_MethodName: LoadLevel
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2349,6 +2349,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelauswahlButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537453616695341120, guid: fd2ff73e47fa94bf0835766b505619b0,
+        type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537453616695341120, guid: fd2ff73e47fa94bf0835766b505619b0,
+        type: 3}
+      propertyPath: levelName
+      value: Levelauswahl
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd2ff73e47fa94bf0835766b505619b0, type: 3}

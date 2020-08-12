@@ -29,6 +29,7 @@ public class WinController : MonoBehaviour
             yield return new WaitForSeconds(0.17f + i/anzahl);
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 1);
             coinsLabel.GetComponent<Text>().text = "" + PlayerPrefs.GetInt("Coins");
+            GameObject.Find("GameManager").GetComponent<GameManager>().ShowCoins();
         }
     }
 }

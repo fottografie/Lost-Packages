@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public int paketIndex;
     public int paketStartIndex;
-    private int[] paketRandomStartSpots = new int[] {26, 27, 28, 31, 32, 33, 35, 36, 37};
+    private int[] paketRandomStartSpots = new int[] { 26, 27, 28, 31, 32, 33, 35, 36, 37};
 
     public int anzahlHolz;
     private int[] holzStartIndex;
@@ -50,10 +50,16 @@ public class GameManager : MonoBehaviour
 
     public bool dialogueActive = false;
 
+    private Sprite[] paketTextures;
+    private Sprite[] spielerTextures;
+
 
     //Initiiert alle Spielelemente
     void Start()
     {
+        spielerTextures = GameObject.Find("SpielerTextures").GetComponent<TextureArray>().textures;
+        paketTextures = GameObject.Find("PaketTextures").GetComponent<TextureArray>().textures;
+
         zuege = maxZuege;
         levelLabel.GetComponent<Text>().text = "Level " + level;
         GegenstandSpotsInit();
@@ -76,6 +82,8 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt("aktuellesLevel", level);
         PlayerPrefs.SetInt("Menue", 0);
+
+        UpdateTextures();
     }
 
     IEnumerator OpenDialogue()
@@ -128,17 +136,30 @@ public class GameManager : MonoBehaviour
             coins[i].GetComponent<GegenstandBewegung>().index = coinsStartIndex[i];
         }
 
-
         //Paket Instantiierung
+        paket.GetComponent<SpriteRenderer>().sprite = paketTextures[PlayerPrefs.GetInt("paketTexture")];
         parent = GameObject.Find("Kachel " + paketStartIndex);
         Instantiate(paket, parent.transform.position, Quaternion.Euler(0, 0, 0));
         paketIndex = paketStartIndex;
+        //paket.GetComponent<SpriteRenderer>().sprite = paketTextures[PlayerPrefs.GetInt("paketTexture")];
+
 
         //Spieler Instantiierung
+        spieler.GetComponent<SpriteRenderer>().sprite = spielerTextures[PlayerPrefs.GetInt("spielerTexture")];
         parent = GameObject.Find("Kachel " + spielerStartIndex);
         Instantiate(spieler, parent.transform.position, Quaternion.Euler(0, 0, 0));
         spielerIndex = spielerStartIndex;
+        //spieler.GetComponent<SpriteRenderer>().sprite = spielerTextures[PlayerPrefs.GetInt("spielerTexture")];
+
     }
+
+
+    private void UpdateTextures()
+    {
+        paket.GetComponent<SpriteRenderer>().sprite = paketTextures[PlayerPrefs.GetInt("paketTexture")];
+        spieler.GetComponent<SpriteRenderer>().sprite = spielerTextures[PlayerPrefs.GetInt("spielerTexture")];
+    }
+
 
     //Initiiert das globale Array, welches die freien Felder auf dem Spielfeld enthält
     void GegenstandSpotsInit()
@@ -372,17 +393,17 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void Win()
+    public void OpenSceneWithDelay(string scene)
     {
-        StartCoroutine(WaitForWin());
+        StartCoroutine(WaitFor(scene));
     }
 
 
-    IEnumerator WaitForWin()
+    IEnumerator WaitFor(string scene)
     {
         yield return new WaitForSeconds(1f);
 
         FindObjectOfType<AudioManager>().Play("WinSound");
-        SceneManager.LoadScene("Win", LoadSceneMode.Additive);
+        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
     }
 }
