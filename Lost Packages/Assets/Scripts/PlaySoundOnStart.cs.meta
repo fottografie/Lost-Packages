@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 522d9764ee248425894b4d202284509e
+=======
+<<<<<<< Updated upstream:Lost Packages/Assets/Scripts/GameManager.cs.meta
+guid: 5b6ceef91c0da4532aac7a0bc7f7fd6d
+=======
+guid: 522d9764ee248425894b4d202284509e
+>>>>>>> Stashed changes:Lost Packages/Assets/Scripts/PlaySoundOnStart.cs.meta
+>>>>>>> Stashed changes
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -457,7 +457,11 @@ PrefabInstance:
     - target: {fileID: 1907262212428652949, guid: 24b783e6a5b314142a8c460a1ca2a4c3,
         type: 3}
       propertyPath: m_Name
+<<<<<<< Updated upstream
       value: Background (1)
+=======
+      value: Background
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 4731756974598213049, guid: 24b783e6a5b314142a8c460a1ca2a4c3,
         type: 3}

@@ -12,6 +12,17 @@ public class LevelInsel : MonoBehaviour
     {
         buttonHit = GameObject.Find("AudioButtonHit").GetComponent<AudioSource>();
         buttonHit.Play(0);
+<<<<<<< Updated upstream
         SceneManager.LoadScene(levelLink, LoadSceneMode.Single);
+=======
+        if (levelLink == "Menue")
+        {
+            SceneManager.LoadScene("Menue", LoadSceneMode.Additive);
+        }
+        else
+        {
+            SceneManager.LoadScene(levelLink, LoadSceneMode.Single);
+        }
+>>>>>>> Stashed changes
     }
 }

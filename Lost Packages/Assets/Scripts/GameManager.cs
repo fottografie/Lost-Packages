@@ -93,7 +93,11 @@ public class GameManager : MonoBehaviour
         GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index = paketStartIndex;
 
         parent = GameObject.Find("Kachel " + spielerStartIndex);
+<<<<<<< Updated upstream
         Instantiate(spieler, parent.transform.position, parent.transform.rotation);
+=======
+        Instantiate(spieler, parent.transform.position, Quaternion.Euler(0, 0, 0));
+>>>>>>> Stashed changes
         GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index = paketStartIndex;
     }
 

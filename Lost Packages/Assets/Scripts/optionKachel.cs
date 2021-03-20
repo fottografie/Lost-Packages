@@ -85,7 +85,10 @@ public class optionKachel : MonoBehaviour
 
             if (GameObject.Find("Kachel " + index).GetComponent<Kachel>().fischernetz)
             {
+<<<<<<< Updated upstream
                 Debug.Log("Tada");
+=======
+>>>>>>> Stashed changes
 
                 holz = GameObject.FindGameObjectsWithTag("Holzplanke");
                 if (holz != null)
@@ -166,7 +169,10 @@ public class optionKachel : MonoBehaviour
 
             if (GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().GetZuege() < 1)
             {
+<<<<<<< Updated upstream
                 Debug.Log("VERLOREN!");
+=======
+>>>>>>> Stashed changes
                 PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().level);
                 SceneManager.LoadScene("Loose", LoadSceneMode.Single);
             }
@@ -176,7 +182,10 @@ public class optionKachel : MonoBehaviour
             //Überprüfung ob der Spieler gewonnen hat (ob er auf dem gleichen Feld wie das Paket steht)
             if (GameObject.FindGameObjectWithTag("Spieler").GetComponent<SpielerBewegung>().index == GameObject.FindGameObjectWithTag("Paket").GetComponent<PaketBewegung>().index)
             {
+<<<<<<< Updated upstream
                 Debug.Log("GEWONNEN!");
+=======
+>>>>>>> Stashed changes
                 PlayerPrefs.SetInt("Zuganzahl", GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().GetZuege());
                 PlayerPrefs.SetInt("NextScene", GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().level);
                 SceneManager.LoadScene("Win", LoadSceneMode.Single);

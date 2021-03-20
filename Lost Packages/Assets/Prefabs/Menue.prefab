@@ -121,4 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfba9af804dc43b0a68bad642a3db7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   levelLink: Levelauswahl
+=======
+  levelLink: Menue
+>>>>>>> Stashed changes
