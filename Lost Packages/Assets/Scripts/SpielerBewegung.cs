@@ -8,15 +8,9 @@ public class SpielerBewegung : MonoBehaviour
     public GameObject optionPfeil;
 
     public GameObject[] options = new GameObject[3];
-    private GameObject[] felder = new GameObject[3];
 
     public int index;
     public int minimumRounds;
-    private GameObject[] minimumOptions;
-
-    private GameObject[] holzKachel;
-
-
 
     public Vector3 start;
     public Vector3 ende;
@@ -25,31 +19,12 @@ public class SpielerBewegung : MonoBehaviour
     public bool finishedAnimating = true;
 
 
-    // Start is called before the first frame update
     void Start()
     {
-        index = GameObject.FindGameObjectWithTag("Background").GetComponent<GameManager>().spielerStartIndex;
+        index = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().spielerStartIndex;
         start = transform.position;
         ende = transform.position;
         ShowOptions();
-
-
-        //holzKachel = new GameObject[3];
-        //
-        //for(int i = 0; i < holzKachel.Length; i++)
-        //{
-        //    holzKachel[i] = GameObject.FindGameObjectWithTag("Background").GetComponent<Game>().holz[i];
-        //
-        //}
-
-
-        //GameObject.FindGameObjectWithTag("Background").GetComponent<Game>().MinimumRounds(GameObject.Find("Kachel " + GameObject.FindGameObjectWithTag("Background").GetComponent<Game>().paketStartIndex).GetComponent<Kachel>().flow, holzKachel);
-        //minimumRounds = GameObject.FindGameObjectWithTag("Background").GetComponent<Game>().depth;
-        //minimumOptions = new GameObject[GameObject.FindGameObjectWithTag("Background").GetComponent<Game>().options.Count];
-        //for(int i = 0; i < minimumOptions.Length; i++)
-        //{
-        //    minimumOptions[i] = GameObject.FindGameObjectWithTag("Background").GetComponent<Game>().options[i];
-        //}
     }
 
     //Entfernt alle grünen options Felder
@@ -67,7 +42,7 @@ public class SpielerBewegung : MonoBehaviour
     {
         options = GameObject.Find("Kachel " + index).GetComponent<Kachel>().PlayerNextField();
         float angle = GameObject.Find("Kachel " + index).GetComponent<Kachel>().flowAngle;
-        GameObject[] felder = new GameObject[4];
+        GameObject[] felder = new GameObject[3];
 
         DestroyAllOptional();
 
@@ -75,19 +50,17 @@ public class SpielerBewegung : MonoBehaviour
         if((options[0] != null && options[0].GetComponent<Kachel>().clear && !options[0].GetComponent<Kachel>().stoneBool) || (options[0] != null && options[0].GetComponent<Kachel>().package && !options[0].GetComponent<Kachel>().stoneBool))
         {
             felder[0] = Instantiate(optionKachel, options[0].transform.position, Quaternion.Euler(0, 0, 0));
-            felder[0].GetComponent<optionKachel>().index = options[0].GetComponent<Kachel>().index;
+            felder[0].GetComponent<OptionKachel>().index = options[0].GetComponent<Kachel>().index;
             float pi = (angle + 300) % 360;
-            //if (!GameObject.Find("Kachel " + index).GetComponent<Kachel>().strudelBool)
-            //{
-                Instantiate(optionPfeil, GameObject.Find("Kachel " + index).GetComponent<Kachel>().transform.position, Quaternion.Euler(0, 0, pi));
-            //}
+
+            Instantiate(optionPfeil, GameObject.Find("Kachel " + index).GetComponent<Kachel>().transform.position, Quaternion.Euler(0, 0, pi));
         }
 
         //Option-Pfeil + -Kachel in der Flussrichtung
         if ((options[1] != null && options[1].GetComponent<Kachel>().clear && !options[1].GetComponent<Kachel>().stoneBool) || (options[1] != null && options[1].GetComponent<Kachel>().package && !options[1].GetComponent<Kachel>().stoneBool))
         {
             felder[1] = Instantiate(optionKachel, options[1].transform.position, Quaternion.Euler(0, 0, 0));
-            felder[1].GetComponent<optionKachel>().index = options[1].GetComponent<Kachel>().index;
+            felder[1].GetComponent<OptionKachel>().index = options[1].GetComponent<Kachel>().index;
 
             Instantiate(optionPfeil, GameObject.Find("Kachel " + index).GetComponent<Kachel>().transform.position, Quaternion.Euler(0, 0, angle));
         }
@@ -96,26 +69,19 @@ public class SpielerBewegung : MonoBehaviour
         if ((options[2] != null && options[2].GetComponent<Kachel>().clear && !options[2].GetComponent<Kachel>().stoneBool) || (options[2] != null && options[2].GetComponent<Kachel>().package && !options[2].GetComponent<Kachel>().stoneBool))
         {
             felder[2] = Instantiate(optionKachel, options[2].transform.position, Quaternion.Euler(0, 0, 0));
-            felder[2].GetComponent<optionKachel>().index = options[2].GetComponent<Kachel>().index;
+            felder[2].GetComponent<OptionKachel>().index = options[2].GetComponent<Kachel>().index;
             float phi = (angle + 60) % 360;
             Instantiate(optionPfeil, GameObject.Find("Kachel " + index).GetComponent<Kachel>().transform.position, Quaternion.Euler(0, 0, phi));
         }
-
-
     }
 
-
-
-
-
-
+    //Für Spieler Animation
     private void FixedUpdate()
     {
         if (start != ende)
         {
             start = ZugAnimation();
             transform.position = start;
-
         }
         else
         {
@@ -123,7 +89,7 @@ public class SpielerBewegung : MonoBehaviour
         }
     }
 
-
+    //Spieler Animation
     Vector3 ZugAnimation()
     {
         richtung = ende - start;
@@ -133,7 +99,5 @@ public class SpielerBewegung : MonoBehaviour
         newStart = start + richtung;
 
         return newStart;
-
     }
-
 }

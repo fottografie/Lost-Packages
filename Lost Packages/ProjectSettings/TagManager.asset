@@ -16,6 +16,15 @@ TagManager:
   - belegtPaketPfeil
   - strudelAnimation
   - Fischernetz
+  - GameManager
+  - DialogueManager
+  - Coin
+  - WaterSplashes
+  - CoinExplosion
+  - ripple
+  - CoinLabelShop
+  - CoinLabelShopText
+  - CoinManager
   layers:
   - Default
   - TransparentFX
@@ -25,7 +34,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Gegenstand
   - 
   - 
   - 
