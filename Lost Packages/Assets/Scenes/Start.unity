@@ -664,6 +664,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lagerfeuer
       objectReference: {fileID: 0}
+    - target: {fileID: 3741754318412225824, guid: b37d8427322c447a6a87dfecd28bf607,
+        type: 3}
+      propertyPath: fireObject
+      value: 
+      objectReference: {fileID: 5479524083951520319, guid: 5974de33d85654244882566bca2466a0,
+        type: 3}
+    - target: {fileID: 3741754318412225824, guid: b37d8427322c447a6a87dfecd28bf607,
+        type: 3}
+      propertyPath: fire
+      value: 
+      objectReference: {fileID: 5479524083951520319, guid: 5974de33d85654244882566bca2466a0,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b37d8427322c447a6a87dfecd28bf607, type: 3}
 --- !u!1001 &1167192189
